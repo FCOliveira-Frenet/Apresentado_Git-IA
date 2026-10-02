@@ -1,0 +1,2 @@
+window.CESTA_SUPABASE_URL = '';
+window.CESTA_SUPABASE_ANON_KEY = '';

@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0f172a" />
+  <meta name="description" content="Dashboard moderno de tarefas e agenda em estilo premium." />
+  <link rel="manifest" href="manifest.json" />
+  <link rel="icon" href="icon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="styles.css" />
+  <title>PulseBoard</title>
+</head>
+<body>
+  <div class="shell">
+    <aside class="sidebar">
+      <div class="brand-block">
+        <div class="brand-mark">P</div>
+        <div>
+          <span>Work OS</span>
+          <strong>PulseBoard</strong>
+        </div>
+      </div>
+
+      <nav class="side-nav" aria-label="Navegação principal">
+        <button class="nav-item active" type="button"><span>◈</span> Visão geral</button>
+        <button class="nav-item" type="button"><span>▣</span> Pipeline</button>
+        <button class="nav-item" type="button"><span>◌</span> Calendário</button>
+        <button class="nav-item" type="button"><span>◎</span> Equipe</button>
+      </nav>
+
+      <div class="sidebar-panel">
+        <p class="panel-label">Status</p>
+        <div class="status-list">
+          <div><i class="status-dot backlog"></i> Backlog</div>
+          <div><i class="status-dot inprogress"></i> Em progresso</div>
+          <div><i class="status-dot review"></i> Revisão</div>
+          <div><i class="status-dot done"></i> Concluído</div>
+        </div>
+      </div>
+
+      <div class="sidebar-panel summary-card">
+        <p class="panel-label">Resumo</p>
+        <h3 id="summary-date">Hoje</h3>
+        <div class="summary-pill">
+          <span>Atividades</span>
+          <strong id="summary-badge">0</strong>
+        </div>
+      </div>
+    </aside>
+
+    <main class="main-panel">
+      <header class="topbar">
+        <div>
+          <span class="eyebrow">Dashboard executivo</span>
+          <h1 id="current-title">Hoje</h1>
+        </div>
+
+        <div class="topbar-actions">
+          <label class="search-box" aria-label="Buscar atividade">
+            <span>?</span>
+            <input id="search-input" type="search" placeholder="Buscar atividade..." />
+          </label>
+          <button class="secondary-btn" id="today-button" type="button">Hoje</button>
+          <button class="primary-btn" id="add-button" type="button">+ Nova tarefa</button>
+        </div>
+      </header>
+
+      <section class="stats-grid" aria-label="Resumo do desempenho">
+        <article class="stat-card">
+          <span>Total</span>
+          <strong id="total-tasks">0</strong>
+          <small>Atividades do dia</small>
+        </article>
+        <article class="stat-card accent">
+          <span>Em progresso</span>
+          <strong id="progress-tasks">0</strong>
+          <small>Fase ativa</small>
+        </article>
+        <article class="stat-card success">
+          <span>Concluídas</span>
+          <strong id="done-tasks">0</strong>
+          <small>Entregas</small>
+        </article>
+      </section>
+
+      <section class="workspace">
+        <div class="board-panel">
+          <div class="panel-header">
+            <h2>Pipeline de atividades</h2>
+            <div class="date-navigator">
+              <button id="prev-day" type="button" aria-label="Dia anterior">←</button>
+              <input id="date-picker" type="date" />
+              <button id="next-day" type="button" aria-label="Próximo dia">→</button>
+            </div>
+          </div>
+
+          <div id="pipeline-board" class="pipeline-board" aria-live="polite"></div>
+        </div>
+
+        <aside class="side-panel">
+          <div class="calendar-block">
+            <div class="panel-header compact-header">
+              <h2>Calendário</h2>
+              <button class="mini-btn" id="month-reset" type="button">Mês</button>
+            </div>
+
+            <div class="calendar-wrap">
+              <div class="calendar-head">
+                <button type="button" id="prev-month" aria-label="Mês anterior">←</button>
+                <strong id="month-name">Outubro 2026</strong>
+                <button type="button" id="next-month" aria-label="Próximo mês">→</button>
+              </div>
+              <div id="calendar-grid" class="calendar-grid"></div>
+            </div>
+          </div>
+
+          <div class="team-block">
+            <div class="panel-header compact-header">
+              <h2>Equipe</h2>
+              <span class="bubble" id="team-count">0</span>
+            </div>
+            <div id="team-list" class="team-list"></div>
+          </div>
+        </aside>
+      </section>
+    </main>
+  </div>
+
+  <div class="modal hidden" id="task-modal" aria-hidden="true">
+    <div class="modal-backdrop" data-close-modal="true"></div>
+    <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <div class="modal-head">
+        <h2 id="modal-title">Nova tarefa</h2>
+        <button class="close-button" id="close-modal" type="button" aria-label="Fechar">×</button>
+      </div>
+
+      <form id="task-form">
+        <label>
+          <span>Título</span>
+          <input name="title" type="text" maxlength="80" placeholder="Ex.: Revisão de entrega" required />
+        </label>
+
+        <div class="form-grid">
+          <label>
+            <span>Data</span>
+            <input name="date" type="date" required />
+          </label>
+          <label>
+            <span>Hora</span>
+            <input name="time" type="time" />
+          </label>
+        </div>
+
+        <div class="form-grid">
+          <label>
+            <span>Categoria</span>
+            <select name="category">
+              <option>Produto</option>
+              <option>Operações</option>
+              <option>Marketing</option>
+              <option>Financeiro</option>
+              <option>Cliente</option>
+            </select>
+          </label>
+          <label>
+            <span>Responsável</span>
+            <input name="owner" type="text" maxlength="30" placeholder="Nome da pessoa" />
+          </label>
+        </div>
+
+        <div class="form-grid">
+          <label>
+            <span>Prioridade</span>
+            <select name="priority">
+              <option value="alta">Alta</option>
+              <option value="media" selected>Média</option>
+              <option value="baixa">Baixa</option>
+            </select>
+          </label>
+          <label>
+            <span>Etapa</span>
+            <select name="stage">
+              <option value="backlog">Backlog</option>
+              <option value="inprogress">Em progresso</option>
+              <option value="review">Revisão</option>
+              <option value="done">Concluído</option>
+            </select>
+          </label>
+        </div>
+
+        <label>
+          <span>Observações</span>
+          <textarea name="notes" rows="3" placeholder="Detalhes, prazo ou dependências..."></textarea>
+        </label>
+
+        <div class="form-actions">
+          <button class="secondary-btn" type="button" data-close-modal="true">Cancelar</button>
+          <button class="primary-btn" type="submit">Salvar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
