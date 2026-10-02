@@ -390,7 +390,8 @@
         </div>
 
         <nav class="nav-links">
-          <a href="#visao">Visão geral</a>
+          <a href="#visao">Git e GitHub</a>
+          <a href="#visao" data-open-tab="ai-git">IA + Git</a>
           <a href="#fluxo-ia">Fluxo</a>
           <a href="#visao" data-open-tab="skills">Skills</a>
           <a href="#visao" data-open-tab="security">Segurança</a>
@@ -402,15 +403,15 @@
       <section class="hero">
         <div class="hero-grid">
           <div>
-            <span class="eyebrow">IA + GitHub</span>
-            <h1>Conexão do projeto com inteligência artificial.</h1>
+            <span class="eyebrow">GitHub • Git • IA</span>
+            <h1>Colaboração, versionamento e inteligência artificial.</h1>
             <p class="lead">
-              A IA funciona como copiloto do repositório: analisa contexto, organiza documentação, sugere melhorias,
-              prepara commits e acelera a execução, mantendo a decisão final sempre sob controle humano.
+              Entenda primeiro como Git e GitHub organizam o trabalho, preservam o histórico e conectam equipes.
+              Depois, veja onde a IA pode apoiar esse fluxo sem substituir revisão e decisão humanas.
             </p>
 
             <div class="cta-row">
-              <a class="btn primary" href="#visao">Explorar painel</a>
+              <a class="btn primary" href="#visao">Por que Git importa</a>
               <a class="btn secondary" href="#fluxo-ia">Ver o fluxo</a>
             </div>
           </div>
@@ -418,100 +419,170 @@
           <div class="hero-card">
             <div class="mini-title">Visão operacional</div>
             <div class="stat-list">
-              <div class="stat-item"><span>Agente</span><strong>IA generativa</strong></div>
-              <div class="stat-item"><span>Contexto</span><strong>Repositório</strong></div>
-              <div class="stat-item"><span>Skills</span><strong>Especializadas</strong></div>
-              <div class="stat-item"><span>Controle</span><strong>Humano</strong></div>
+              <div class="stat-item"><span>Versionamento</span><strong>Git</strong></div>
+              <div class="stat-item"><span>Colaboração</span><strong>GitHub</strong></div>
+              <div class="stat-item"><span>Apoio</span><strong>IA</strong></div>
+              <div class="stat-item"><span>Decisões</span><strong>Equipe</strong></div>
             </div>
           </div>
         </div>
       </section>
 
       <section id="visao" class="product-shell">
-        <div class="tabs" role="tablist" aria-label="Abas da integração com IA">
-          <button id="tab-overview" class="tab active" type="button" role="tab" aria-selected="true" aria-controls="overview" data-tab="overview">Visão geral</button>
-          <button id="tab-workflow" class="tab" type="button" role="tab" aria-selected="false" aria-controls="workflow" data-tab="workflow">Fluxo de trabalho</button>
+        <div class="tabs" role="tablist" aria-label="Conteúdo da aula sobre Git e inteligência artificial">
+          <button id="tab-overview" class="tab active" type="button" role="tab" aria-selected="true" aria-controls="overview" data-tab="overview">Git e GitHub</button>
+          <button id="tab-ai-git" class="tab" type="button" role="tab" aria-selected="false" aria-controls="ai-git" data-tab="ai-git">IA + Git</button>
+          <button id="tab-workflow" class="tab" type="button" role="tab" aria-selected="false" aria-controls="workflow" data-tab="workflow">Fluxo em equipe</button>
           <button id="tab-skills" class="tab" type="button" role="tab" aria-selected="false" aria-controls="skills" data-tab="skills">Skills e automações</button>
           <button id="tab-setup-ai" class="tab" type="button" role="tab" aria-selected="false" aria-controls="setup-ai" data-tab="setup-ai">Configuração Git + IA</button>
           <button id="tab-security" class="tab" type="button" role="tab" aria-selected="false" aria-controls="security" data-tab="security">Permissões e segurança</button>
         </div>
 
         <div id="overview" class="tab-panel active" role="tabpanel" aria-labelledby="tab-overview" tabindex="0">
+          <div class="section-head">
+            <h2>Por que Git é importante?</h2>
+            <p>Git é o sistema de controle de versão que registra a evolução de arquivos e permite que pessoas trabalhem juntas com histórico, comparação e recuperação de mudanças.</p>
+          </div>
+
           <div class="pane-grid">
             <div class="feature-stack">
               <div class="feature-row">
-                <h3>Como funciona a conexão</h3>
-                <p>
-                  A IA conversa com o projeto em contexto. Ela lê arquivos, entende a estrutura do repositório,
-                  inspeciona commits anteriores e ajuda a transformar ideias em implementação consistente, sem quebrar o fluxo do time.
-                </p>
-              </div>
-
-              <div class="feature-row">
-                <h3>O que a IA pode fazer</h3>
+                <h3>Git e GitHub: funções diferentes</h3>
                 <ul>
-                  <li>Explicar código, arquitetura e decisões de implementação.</li>
-                  <li>Gerar commits bem descritos e alinhados ao contexto.</li>
-                  <li>Organizar documentação, README e guias de onboarding.</li>
-                  <li>Sugerir refatorações, correções e melhorias de manutenção.</li>
-                  <li>Ajudar com testes, revisão e validação antes do merge.</li>
+                  <li><strong>Git:</strong> ferramenta distribuída de versionamento. Registra commits, branches e merges localmente.</li>
+                  <li><strong>GitHub:</strong> serviço remoto para hospedar repositórios Git e colaborar com issues, pull requests, revisão, automações e releases.</li>
+                  <li>É possível usar Git sem GitHub; GitHub usa Git e adiciona colaboração e serviços ao redor do repositório.</li>
+                </ul>
+              </div>
+              <div class="feature-row">
+                <h3>O que fica registrado</h3>
+                <p>Commits guardam um conjunto de alterações com autor, data, mensagem e ligação com o histórico anterior. Branches permitem desenvolver uma mudança em paralelo; merge reúne o trabalho depois da revisão.</p>
+                <div class="code-block">git status
+git diff
+git add src/arquivo.js
+git commit -m "fix: corrige validação do formulário"
+git log --oneline</div>
+              </div>
+              <div class="feature-row">
+                <h3>Dependências: o que Git faz e o que não faz</h3>
+                <p>Git versiona arquivos que descrevem dependências, como package.json, package-lock.json, requirements.txt ou pyproject.toml. Quem baixa e instala pacotes é o gerenciador do ecossistema, como npm, pip ou Poetry.</p>
+                <p>Manifestos e lockfiles ajudam a equipe a reproduzir versões compatíveis. Pastas instaladas, como node_modules, normalmente são regeneradas e ficam fora do Git pelo .gitignore.</p>
+              </div>
+            </div>
+            <div class="feature-stack">
+              <div class="feature-row">
+                <h3>Valor para o time e o dia a dia</h3>
+                <ul>
+                  <li>Divide o trabalho em branches por tarefa, sem sobrescrever diretamente o trabalho alheio.</li>
+                  <li>Usa pull requests para discutir diffs, solicitar revisão e registrar decisões.</li>
+                  <li>Identifica quando e por que algo mudou e facilita investigar regressões.</li>
+                  <li>Permite comparar versões, recuperar mudanças e preparar releases com mais confiança.</li>
+                  <li>Ajuda no onboarding: integrantes consultam código, histórico, documentação e issues.</li>
+                </ul>
+              </div>
+              <div class="feature-row">
+                <h3>Mais que código; não é backup completo</h3>
+                <p>O repositório pode guardar documentação, testes, scripts, configurações e diagramas relevantes. README e histórico reduzem a dependência de conhecimento informal.</p>
+                <p>Um clone remoto ajuda a recuperar o repositório, mas não substitui backup de bancos de dados, arquivos ignorados ou artefatos externos. Segredos, credenciais e dados pessoais não devem ser publicados.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="ai-git" class="tab-panel" role="tabpanel" aria-labelledby="tab-ai-git" tabindex="0">
+          <div class="pane-grid">
+            <div class="feature-stack">
+              <div class="feature-row">
+                <h3>O que significa IA + Git</h3>
+                <p>Git mantém o histórico confiável; uma ferramenta de IA pode ajudar a compreender e modificar o projeto. São funções complementares: IA não é controle de versão e Git não gera respostas inteligentes.</p>
+              </div>
+              <div class="feature-row">
+                <h3>Como a IA pode apoiar o fluxo</h3>
+                <ul>
+                  <li>Explicar arquivos, arquitetura, mensagens de erro e diffs.</li>
+                  <li>Propor uma implementação em uma branch, mantendo mudanças revisáveis.</li>
+                  <li>Sugerir testes, documentação e mensagens para commits ou pull requests.</li>
+                  <li>Resumir histórico relevante ou ajudar a investigar uma regressão.</li>
                 </ul>
               </div>
             </div>
-
             <aside class="status-box">
-              <span class="tag">Operação ativa</span>
-              <h3 style="margin: 18px 0 12px;">Ecossistema inteligente</h3>
-              <p style="margin: 0; color: var(--muted); line-height: 1.7;">
-                O papel da IA é ampliar velocidade, clareza e organização. O time continua responsável por decisões de negócio, revisão final, aprovação e publicação.
-              </p>
-
-              <div class="mini-metrics">
-                <div class="mini-metric"><span>Commits</span><strong>Rastreáveis</strong></div>
-                <div class="mini-metric"><span>Skills</span><strong>Contextuais</strong></div>
-                <div class="mini-metric"><span>Review</span><strong>Mais ágil</strong></div>
-                <div class="mini-metric"><span>Entrega</span><strong>Mais rápida</strong></div>
-              </div>
+              <span class="tag">Princípio de trabalho</span>
+              <h3 style="margin: 18px 0 12px;">IA sugere; Git registra; o time decide.</h3>
+              <p style="margin: 0; color: var(--muted); line-height: 1.7;">Revise o diff, rode testes e confirme os comandos antes de commitar ou enviar. A aprovação e o merge seguem as regras definidas pela equipe.</p>
+              <div class="code-block">git status
+git diff
+# analisar sugestões da IA
+git diff --check
+# testar antes de criar o commit</div>
             </aside>
+          </div>
+          <div class="feature-row" style="margin-top: 18px;">
+            <h3>Limite desta demonstração</h3>
+            <p>Esta aula explica o conceito e os cuidados de IA + Git, mas não conecta a página a um modelo de IA. As consultas são feitas em uma ferramenta autorizada separadamente; nunca envie chaves, tokens, senhas ou conteúdo confidencial sem permissão.</p>
           </div>
         </div>
 
         <div id="workflow" class="tab-panel" role="tabpanel" aria-labelledby="tab-workflow" tabindex="0">
-          <div class="pane-grid">
-            <div class="feature-stack">
-              <div class="feature-row">
-                <h3>Fluxo sugerido</h3>
-                <p>O modelo mais eficiente combina contexto do repositório, instrução clara e validação humana.</p>
-                <ul>
-                  <li>1. O agente lê o projeto e identifica o estado atual.</li>
-                  <li>2. O time descreve a tarefa ou a correção desejada.</li>
-                  <li>3. A IA propõe implementação, documentação e testes.</li>
-                  <li>4. O responsável revisa, aprova e faz o merge.</li>
-                </ul>
-              </div>
+          <div class="section-head">
+            <h2>Git no fluxo diário de uma equipe</h2>
+            <p>O fluxo combina rastreabilidade local no Git com colaboração e revisão no GitHub.</p>
+          </div>
 
-              <div class="feature-row">
-                <h3>Como enviar commits e atualizações</h3>
-                <p>O envio de alterações segue um fluxo simples e profissional:</p>
+          <div class="timeline">
+            <div class="step">
+              <div class="step-number">01</div>
+              <div>
+                <h3>Planejar e atualizar</h3>
+                <p>Registre o trabalho em uma issue ou tarefa, atualize sua cópia local e crie uma branch para manter a mudança isolada.</p>
+                <div class="code-block">git switch main
+git pull --ff-only origin main
+git switch -c feat/minha-tarefa</div>
+              </div>
+            </div>
+
+            <div class="step">
+              <div class="step-number">02</div>
+              <div>
+                <h3>Fazer mudanças pequenas e verificáveis</h3>
+                <p>Edite código, documentação ou testes. Confira o estado e o diff para confirmar que só os arquivos pretendidos serão registrados.</p>
                 <div class="code-block">git status
-git add .
-git commit -m "feat: melhora a estrutura do painel e atualiza documentação"
-git push origin main</div>
+git diff
+git add caminho/do/arquivo
+git diff --staged</div>
               </div>
             </div>
 
-            <div class="feature-stack">
-              <div class="feature-row">
-                <h3>O papel da IA</h3>
-                <p>Ela organiza a execução, reduz ruído e dá contexto para cada etapa, sem assumir responsabilidades finais do produto.</p>
-                <ul>
-                  <li>Melhora a qualidade dos commits.</li>
-                  <li>Ajuda a documentar mudanças.</li>
-                  <li>Cria melhores descrições para PRs.</li>
-                  <li>Reconhece riscos antes do merge.</li>
-                </ul>
+            <div class="step">
+              <div class="step-number">03</div>
+              <div>
+                <h3>Registrar e compartilhar</h3>
+                <p>Crie commits com mensagens claras e envie sua branch remota. O histórico mostra o que mudou e permite que outras pessoas busquem a branch.</p>
+                <div class="code-block">git commit -m "feat: adiciona filtro por status"
+git push -u origin feat/minha-tarefa</div>
               </div>
             </div>
+
+            <div class="step">
+              <div class="step-number">04</div>
+              <div>
+                <h3>Revisar em pull request</h3>
+                <p>Abra um pull request, explique objetivo e testes, peça revisão e discuta o diff. Checks automáticos podem rodar antes de aprovar.</p>
+              </div>
+            </div>
+
+            <div class="step">
+              <div class="step-number">05</div>
+              <div>
+                <h3>Integrar e manter o histórico</h3>
+                <p>Depois de revisão e validações, faça merge segundo as regras do time. Atualize a branch local e prepare releases quando necessário.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="feature-row" style="margin-top: 18px;">
+            <h3>Onde a IA pode entrar</h3>
+            <p>Em qualquer etapa, um assistente pode explicar comandos e diffs, sugerir testes ou ajudar a redigir uma descrição de pull request. A equipe continua responsável por revisar, executar e aprovar as mudanças.</p>
           </div>
         </div>
 
