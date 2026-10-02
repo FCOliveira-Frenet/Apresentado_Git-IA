@@ -1,35 +1,38 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>GitHub para apresentação do projeto</title>
+    <title>GitHub + IA | Painel premium</title>
     <style>
       :root {
-        --bg: #0b1020;
-        --bg-2: #111827;
-        --panel: rgba(15, 23, 42, 0.82);
-        --card: #121a2d;
-        --primary: #7c3aed;
-        --primary-2: #22c55e;
-        --text: #e5edf7;
-        --muted: #a5b4cf;
-        --line: rgba(148, 163, 184, 0.26);
+        --bg: #070b14;
+        --bg-soft: #0f172a;
+        --panel: rgba(15, 23, 42, 0.8);
+        --line: rgba(148, 163, 184, 0.2);
+        --primary: #8b5cf6;
+        --text: #edf3ff;
+        --muted: #a7b5d3;
       }
 
       * { box-sizing: border-box; }
+
       html { scroll-behavior: smooth; }
+
       body {
         margin: 0;
         font-family: Inter, "Segoe UI", sans-serif;
-        background: radial-gradient(circle at top left, rgba(124, 58, 237, 0.18), transparent 25%),
-                    radial-gradient(circle at bottom right, rgba(34, 197, 94, 0.12), transparent 20%),
-                    linear-gradient(135deg, var(--bg), var(--bg-2));
+        background:
+          radial-gradient(circle at top left, rgba(139, 92, 246, 0.18), transparent 24%),
+          radial-gradient(circle at bottom right, rgba(34, 197, 94, 0.12), transparent 24%),
+          linear-gradient(135deg, var(--bg), var(--bg-soft));
         color: var(--text);
       }
 
+      a { color: inherit; }
+
       .container {
-        width: min(1120px, calc(100% - 32px));
+        width: min(1180px, calc(100% - 32px));
         margin: 0 auto;
       }
 
@@ -38,7 +41,7 @@
         top: 0;
         z-index: 10;
         backdrop-filter: blur(12px);
-        background: rgba(11, 16, 32, 0.7);
+        background: rgba(7, 11, 20, 0.72);
         border-bottom: 1px solid var(--line);
       }
 
@@ -47,41 +50,37 @@
         align-items: center;
         justify-content: space-between;
         min-height: 72px;
-        gap: 20px;
+        gap: 18px;
       }
 
       .brand {
         display: flex;
         align-items: center;
         gap: 12px;
-        font-weight: 700;
+        font-weight: 800;
       }
 
       .brand-mark {
         width: 36px;
         height: 36px;
+        border-radius: 12px;
         display: grid;
         place-items: center;
-        border-radius: 12px;
-        background: linear-gradient(135deg, var(--primary), #8b5cf6);
-        box-shadow: 0 10px 24px rgba(124, 58, 237, 0.35);
+        background: linear-gradient(135deg, var(--primary), #7c3aed);
+        box-shadow: 0 16px 28px rgba(139, 92, 246, 0.35);
       }
 
       .nav-links {
         display: flex;
-        gap: 16px;
         flex-wrap: wrap;
-      }
-
-      .nav-links a {
+        gap: 20px;
         color: var(--muted);
-        text-decoration: none;
-        font-size: 0.93rem;
+        font-size: 0.94rem;
       }
 
-      .hero {
-        padding: 88px 0 64px;
-      }
+      .nav-links a { text-decoration: none; }
+
+      .hero { padding: 88px 0 50px; }
 
       .hero-grid {
         display: grid;
@@ -92,11 +91,11 @@
 
       .eyebrow {
         display: inline-block;
-        padding: 8px 12px;
-        border: 1px solid rgba(124, 58, 237, 0.4);
-        background: rgba(124, 58, 237, 0.12);
-        color: #d8c7ff;
+        background: rgba(139, 92, 246, 0.12);
+        color: #dccdff;
+        border: 1px solid rgba(139, 92, 246, 0.38);
         border-radius: 999px;
+        padding: 8px 12px;
         letter-spacing: 0.12em;
         text-transform: uppercase;
         font-size: 0.7rem;
@@ -104,60 +103,62 @@
       }
 
       h1 {
-        font-size: clamp(2.8rem, 5vw, 5rem);
-        line-height: 1.05;
-        margin: 18px 0 16px;
+        margin: 18px 0 12px;
+        font-size: clamp(2.6rem, 5vw, 4.7rem);
+        line-height: 1.06;
       }
 
       .lead {
+        max-width: 640px;
         color: var(--muted);
         font-size: 1.08rem;
-        line-height: 1.7;
-        max-width: 640px;
+        line-height: 1.8;
       }
 
       .cta-row {
-        margin-top: 28px;
+        margin-top: 24px;
         display: flex;
-        gap: 14px;
         flex-wrap: wrap;
+        gap: 14px;
       }
 
       .btn {
         display: inline-flex;
         align-items: center;
         justify-content: center;
+        padding: 0.9rem 1.25rem;
         border-radius: 12px;
-        padding: 0.9rem 1.2rem;
         text-decoration: none;
         font-weight: 700;
-        transition: 0.2s ease;
+        transition: transform 0.2s ease, opacity 0.2s ease;
       }
 
+      .btn:hover { transform: translateY(-1px); }
+
       .btn.primary {
-        background: linear-gradient(135deg, var(--primary), #8b5cf6);
+        background: linear-gradient(135deg, var(--primary), #7c3aed);
         color: white;
       }
 
       .btn.secondary {
-        border: 1px solid var(--line);
         background: rgba(148, 163, 184, 0.04);
+        border: 1px solid var(--line);
         color: var(--text);
       }
 
       .hero-card {
-        background: var(--panel);
+        background: rgba(15, 23, 42, 0.82);
         border: 1px solid var(--line);
         border-radius: 26px;
         padding: 22px;
-        box-shadow: 0 24px 60px rgba(15, 23, 42, 0.42);
+        box-shadow: 0 30px 80px rgba(15, 23, 42, 0.42);
       }
 
       .mini-title {
-        color: var(--muted);
-        font-size: 0.76rem;
-        text-transform: uppercase;
+        font-size: 0.74rem;
         letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--muted);
       }
 
       .stat-list {
@@ -170,72 +171,163 @@
         display: flex;
         justify-content: space-between;
         gap: 12px;
-        padding: 14px 16px;
-        border-radius: 14px;
-        background: rgba(148, 163, 184, 0.04);
         border: 1px solid var(--line);
+        background: rgba(148, 163, 184, 0.04);
+        border-radius: 14px;
+        padding: 14px 16px;
       }
 
-      .stat-item strong { font-size: 1.2rem; }
+      .stat-item span { color: var(--muted); }
+      .stat-item strong { font-size: 1.05rem; }
 
-      section {
-        padding: 28px 0 20px;
-      }
+      section { padding: 26px 0 18px; }
 
       .section-head {
-        margin-bottom: 24px;
+        margin-bottom: 22px;
       }
 
       .section-head h2 {
-        font-size: clamp(2rem, 2vw, 3rem);
         margin: 0 0 10px;
+        font-size: clamp(2rem, 3vw, 2.6rem);
       }
 
       .section-head p {
         margin: 0;
         color: var(--muted);
-      }
-
-      .grid-3 {
-        display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 18px;
-      }
-
-      .card {
-        background: var(--panel);
-        border: 1px solid var(--line);
-        border-radius: 22px;
-        padding: 24px 20px;
-      }
-
-      .card .icon {
-        width: 42px;
-        height: 42px;
-        display: grid;
-        place-items: center;
-        border-radius: 12px;
-        background: rgba(124, 58, 237, 0.12);
-        margin-bottom: 16px;
-        font-size: 1.4rem;
-      }
-
-      .card h3 {
-        margin: 0 0 10px;
-        font-size: 1.2rem;
-      }
-
-      .card p {
-        margin: 0;
-        color: var(--muted);
-        line-height: 1.7;
-      }
-
-      .list-compact {
-        margin: 12px 0 0;
-        padding-left: 18px;
-        color: var(--muted);
         line-height: 1.8;
+      }
+
+      .product-shell {
+        margin-top: 20px;
+        background: rgba(15, 23, 42, 0.72);
+        border: 1px solid var(--line);
+        border-radius: 28px;
+        overflow: hidden;
+        box-shadow: 0 28px 80px rgba(15, 23, 42, 0.35);
+      }
+
+      .tabs {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        padding: 18px 20px 0;
+        border-bottom: 1px solid var(--line);
+        background: rgba(148, 163, 184, 0.02);
+      }
+
+      .tab {
+        appearance: none;
+        border: 1px solid transparent;
+        background: transparent;
+        color: var(--muted);
+        font: inherit;
+        font-weight: 700;
+        padding: 12px 16px;
+        border-radius: 12px 12px 0 0;
+        cursor: pointer;
+      }
+
+      .tab.active {
+        background: rgba(139, 92, 246, 0.12);
+        border-color: rgba(139, 92, 246, 0.35);
+        color: var(--text);
+      }
+
+      .tab-panel {
+        display: none;
+        padding: 24px 22px 30px;
+      }
+
+      .tab-panel.active { display: block; }
+
+      .pane-grid {
+        display: grid;
+        grid-template-columns: 1.1fr 0.9fr;
+        gap: 22px;
+      }
+
+      .feature-stack {
+        display: grid;
+        gap: 16px;
+      }
+
+      .feature-row {
+        background: rgba(148, 163, 184, 0.04);
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        padding: 20px 18px;
+      }
+
+      .feature-row h3 { margin: 0 0 10px; }
+
+      .feature-row p,
+      .feature-row li {
+        color: var(--muted);
+        line-height: 1.75;
+      }
+
+      .feature-row ul {
+        margin: 10px 0 0;
+        padding-left: 18px;
+      }
+
+      .status-box {
+        background: linear-gradient(135deg, rgba(139, 92, 246, 0.12), rgba(34, 197, 94, 0.08));
+        border: 1px solid var(--line);
+        border-radius: 20px;
+        padding: 20px;
+      }
+
+      .tag {
+        display: inline-block;
+        border-radius: 999px;
+        background: rgba(34, 197, 94, 0.08);
+        border: 1px solid rgba(34, 197, 94, 0.35);
+        color: #b8f7ca;
+        padding: 7px 10px;
+        font-size: 0.72rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+
+      .mini-metrics {
+        margin-top: 18px;
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+      }
+
+      .mini-metric {
+        background: rgba(148, 163, 184, 0.04);
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        padding: 14px;
+      }
+
+      .mini-metric span {
+        display: block;
+        color: var(--muted);
+        font-size: 0.72rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .mini-metric strong {
+        display: block;
+        margin-top: 8px;
+        font-size: 1.3rem;
+      }
+
+      .code-block {
+        margin-top: 12px;
+        background: rgba(2, 6, 23, 0.7);
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        padding: 14px 16px;
+        white-space: pre-wrap;
+        color: #dbeafe;
+        font-family: Consolas, monospace;
+        line-height: 1.7;
       }
 
       .timeline {
@@ -260,27 +352,18 @@
         border-radius: 16px;
         display: grid;
         place-items: center;
-        background: linear-gradient(135deg, var(--primary), #312e81);
-        font-weight: 800;
+        background: rgba(139, 92, 246, 0.12);
+        border: 1px solid rgba(139, 92, 246, 0.35);
+        color: #e7dcff;
+        font-weight: 700;
       }
 
-      .step h3 {
-        margin: 0 0 8px;
-      }
+      .step h3 { margin: 0 0 8px; }
 
       .step p {
         margin: 0;
         color: var(--muted);
         line-height: 1.7;
-      }
-
-      .quote {
-        background: linear-gradient(135deg, rgba(124, 58, 237, 0.12), rgba(34, 197, 94, 0.1));
-        border: 1px solid var(--line);
-        border-radius: 22px;
-        padding: 28px 24px;
-        font-size: 1.1rem;
-        line-height: 1.8;
       }
 
       footer {
@@ -290,10 +373,7 @@
       }
 
       @media (max-width: 920px) {
-        .hero-grid,
-        .grid-3 {
-          grid-template-columns: 1fr;
-        }
+        .hero-grid, .pane-grid { grid-template-columns: 1fr; }
       }
     </style>
   </head>
@@ -302,13 +382,14 @@
       <div class="container nav">
         <div class="brand">
           <div class="brand-mark">G</div>
-          <span>GitHub</span>
+          <span>GitHub + IA</span>
         </div>
+
         <nav class="nav-links">
-          <a href="#porque">Por que usar</a>
-          <a href="#fluxo">Fluxo</a>
-          <a href="#vantagens">Vantagens</a>
-          <a href="#proximos">Próximos passos</a>
+          <a href="#visao">Visão geral</a>
+          <a href="#fluxo-ia">Fluxo</a>
+          <a href="#skills">Skills</a>
+          <a href="#seguranca">Segurança</a>
         </nav>
       </div>
     </header>
@@ -317,202 +398,230 @@
       <section class="hero">
         <div class="hero-grid">
           <div>
-            <span class="eyebrow">Apresentação</span>
-            <h1>GitHub como base para entregar projetos digitais.</h1>
+            <span class="eyebrow">IA + GitHub</span>
+            <h1>Conexão do projeto com inteligência artificial.</h1>
             <p class="lead">
-              O GitHub transforma ideias em projetos organizados, rastreáveis e prontos para evolução.
-              Ele é o espaço ideal para versionar código, acompanhar entregas e mostrar trabalho para clientes, time e stakeholders.
+              A IA funciona como copiloto do repositório: analisa contexto, organiza documentação, sugere melhorias,
+              prepara commits e acelera a execução, mantendo a decisão final sempre sob controle humano.
             </p>
+
             <div class="cta-row">
-              <a class="btn primary" href="#porque">Entender melhor</a>
-              <a class="btn secondary" href="#fluxo">Ver o fluxo</a>
+              <a class="btn primary" href="#visao">Explorar painel</a>
+              <a class="btn secondary" href="#fluxo-ia">Ver o fluxo</a>
             </div>
           </div>
 
           <div class="hero-card">
-            <div class="mini-title">Resumo do projeto</div>
+            <div class="mini-title">Visão operacional</div>
             <div class="stat-list">
-              <div class="stat-item">
-                <span>Repositório</span>
-                <strong>PulseBoard</strong>
+              <div class="stat-item"><span>Agente</span><strong>GitHub Copilot</strong></div>
+              <div class="stat-item"><span>Contexto</span><strong>Repositório</strong></div>
+              <div class="stat-item"><span>Skills</span><strong>Especializadas</strong></div>
+              <div class="stat-item"><span>Controle</span><strong>Humano</strong></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="visao" class="product-shell">
+        <div class="tabs" aria-label="Abas da integração com IA">
+          <button class="tab active" type="button" data-tab="overview">Visão geral</button>
+          <button class="tab" type="button" data-tab="workflow">Fluxo de trabalho</button>
+          <button class="tab" type="button" data-tab="skills">Skills e automações</button>
+          <button class="tab" type="button" data-tab="security">Permissões e segurança</button>
+        </div>
+
+        <div id="overview" class="tab-panel active">
+          <div class="pane-grid">
+            <div class="feature-stack">
+              <div class="feature-row">
+                <h3>Como funciona a conexão</h3>
+                <p>
+                  A IA conversa com o projeto em contexto. Ela lê arquivos, entende a estrutura do repositório,
+                  inspeciona commits anteriores e ajuda a transformar ideias em implementação consistente, sem quebrar o fluxo do time.
+                </p>
               </div>
-              <div class="stat-item">
-                <span>Objetivo</span>
-                <strong>Dashboard</strong>
+
+              <div class="feature-row">
+                <h3>O que a IA pode fazer</h3>
+                <ul>
+                  <li>Explicar código, arquitetura e decisões de implementação.</li>
+                  <li>Gerar commits bem descritos e alinhados ao contexto.</li>
+                  <li>Organizar documentação, README e guias de onboarding.</li>
+                  <li>Sugerir refatorações, correções e melhorias de manutenção.</li>
+                  <li>Ajudar com testes, revisão e validação antes do merge.</li>
+                </ul>
               </div>
-              <div class="stat-item">
-                <span>Status</span>
-                <strong>Ativo</strong>
+            </div>
+
+            <aside class="status-box">
+              <span class="tag">Operação ativa</span>
+              <h3 style="margin: 18px 0 12px;">Ecossistema inteligente</h3>
+              <p style="margin: 0; color: var(--muted); line-height: 1.7;">
+                O papel da IA é ampliar velocidade, clareza e organização. O time continua responsável por decisões de negócio, revisão final, aprovação e publicação.
+              </p>
+
+              <div class="mini-metrics">
+                <div class="mini-metric"><span>Commits</span><strong>Rastreáveis</strong></div>
+                <div class="mini-metric"><span>Skills</span><strong>Contextuais</strong></div>
+                <div class="mini-metric"><span>Review</span><strong>Mais ágil</strong></div>
+                <div class="mini-metric"><span>Entrega</span><strong>Mais rápida</strong></div>
               </div>
-              <div class="stat-item">
-                <span>Entregas</span>
-                <strong>Git + Web</strong>
+            </aside>
+          </div>
+        </div>
+
+        <div id="workflow" class="tab-panel">
+          <div class="pane-grid">
+            <div class="feature-stack">
+              <div class="feature-row">
+                <h3>Fluxo sugerido</h3>
+                <p>O modelo mais eficiente combina contexto do repositório, instrução clara e validação humana.</p>
+                <ul>
+                  <li>1. O agente lê o projeto e identifica o estado atual.</li>
+                  <li>2. O time descreve a tarefa ou a correção desejada.</li>
+                  <li>3. A IA propõe implementação, documentação e testes.</li>
+                  <li>4. O responsável revisa, aprova e faz o merge.</li>
+                </ul>
+              </div>
+
+              <div class="feature-row">
+                <h3>Como enviar commits e atualizações</h3>
+                <p>O envio de alterações segue um fluxo simples e profissional:</p>
+                <div class="code-block">git status
+git add .
+git commit -m "feat: melhora a estrutura do painel e atualiza documentação"
+git push origin main</div>
+              </div>
+            </div>
+
+            <div class="feature-stack">
+              <div class="feature-row">
+                <h3>O papel da IA</h3>
+                <p>Ela organiza a execução, reduz ruído e dá contexto para cada etapa, sem assumir responsabilidades finais do produto.</p>
+                <ul>
+                  <li>Melhora a qualidade dos commits.</li>
+                  <li>Ajuda a documentar mudanças.</li>
+                  <li>Cria melhores descrições para PRs.</li>
+                  <li>Reconhece riscos antes do merge.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="skills" class="tab-panel">
+          <div class="pane-grid">
+            <div class="feature-stack">
+              <div class="feature-row">
+                <h3>Skills e automações</h3>
+                <p>Skills são capacidades especializadas que a IA pode usar conforme o objetivo da tarefa. Elas tornam o agente mais preciso e útil no projeto.</p>
+                <ul>
+                  <li>Revisão de código e padrões de qualidade.</li>
+                  <li>Criação de documentação técnica e onboarding.</li>
+                  <li>Refatoração e organização da arquitetura.</li>
+                  <li>Fluxo de testes, validação e deploy seguro.</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="feature-stack">
+              <div class="feature-row">
+                <h3>Exemplo prático</h3>
+                <p>Uma skill pode ser usada para analisar o projeto, apontar riscos e preparar um resumo claro para a equipe.</p>
+                <div class="code-block">Prompt:
+"Analise este repositório, identifique riscos de manutenção, sugira melhorias de UX e gere um README com instruções de instalação e uso."</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="security" class="tab-panel">
+          <div class="pane-grid">
+            <div class="feature-stack">
+              <div class="feature-row">
+                <h3>Permissões e o que é permitido</h3>
+                <ul>
+                  <li>Sugerir melhorias em código, documentação e processo.</li>
+                  <li>Gerar contextos, resumos e explicações sobre o projeto.</li>
+                  <li>Ajudar na preparação de commits e pull requests.</li>
+                  <li>Reforçar produtividade e revisão ajustada ao contexto.</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="feature-stack">
+              <div class="feature-row">
+                <h3>O que exige controle humano</h3>
+                <ul>
+                  <li>Tokens, credenciais e chaves de acesso.</li>
+                  <li>Arquivos .env e dados sensíveis.</li>
+                  <li>Decisões de merge, deploy e liberação.</li>
+                  <li>Conteúdo crítico do produto e estratégia da entrega.</li>
+                </ul>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      <section id="porque">
+      <section id="fluxo-ia">
         <div class="section-head">
-          <h2>Por que usar GitHub?</h2>
-          <p>Porque ele representa organização, disciplina e profissionalismo em qualquer projeto, principalmente em times que trabalham de forma distribuída ou colaborativa.</p>
-        </div>
-
-        <div class="grid-3">
-          <article class="card">
-            <div class="icon">📦</div>
-            <h3>Versionamento</h3>
-            <p>Você guarda cada mudança do projeto, reverte erros, compara commits e mantém histórico claro do que foi alterado e por quê.</p>
-            <ul class="list-compact">
-              <li>Histórico completo do projeto</li>
-              <li>Rollback seguro</li>
-              <li>Rastreamento de decisões técnicas</li>
-            </ul>
-          </article>
-
-          <article class="card">
-            <div class="icon">🤝</div>
-            <h3>Colaboração em equipe</h3>
-            <p>GitHub permite que várias pessoas trabalhem em paralelo com branches, pull requests, revisão de código e merges controlados.</p>
-            <ul class="list-compact">
-              <li>Branches por feature ou tarefa</li>
-              <li>Pull requests com revisão</li>
-              <li>Menos conflitos e mais previsibilidade</li>
-            </ul>
-          </article>
-
-          <article class="card">
-            <div class="icon">🚀</div>
-            <h3>Organização e entrega</h3>
-            <p>Um repositório bem estruturado comunica maturidade, facilita a manutenção e reforça a confiança na entrega do produto.</p>
-            <ul class="list-compact">
-              <li>Fluxo contínuo de entregas</li>
-              <li>Documentação e contexto preservados</li>
-              <li>Visão profissional para clientes e stakeholders</li>
-            </ul>
-          </article>
-        </div>
-      </section>
-
-      <section id="fluxo">
-        <div class="section-head">
-          <h2>Fluxo de trabalho</h2>
-          <p>Um projeto saudável no GitHub segue uma lógica simples, mas extremamente poderosa para times e entregas contínuas.</p>
+          <h2>Estrutura recomendada para uso profissional</h2>
+          <p>Quando bem guiada, a IA acelera o projeto sem ignorar regras de segurança, qualidade e responsabilidade.</p>
         </div>
 
         <div class="timeline">
           <div class="step">
             <div class="step-number">01</div>
             <div>
-              <h3>Criação do repositório</h3>
-              <p>O projeto nasce em um ponto central de verdade: estrutura inicial, arquivos organizados, documentação e regras mínimas de versionamento.</p>
+              <h3>Contexto do projeto</h3>
+              <p>O agente precisa compreender a intenção, a arquitetura e o padrão do repositório para agir bem.</p>
             </div>
           </div>
 
           <div class="step">
             <div class="step-number">02</div>
             <div>
-              <h3>Commits e versionamento</h3>
-              <p>Cada avanço é registrado em commits com mensagens objetivas, mostrando evolução, contexto e rastreabilidade do que foi alterado.</p>
+              <h3>Objetivo claro</h3>
+              <p>Defina o que precisa ser entregue, qual problema será resolvido e qual resultado esperado.</p>
             </div>
           </div>
 
           <div class="step">
             <div class="step-number">03</div>
             <div>
-              <h3>Branches e revisões</h3>
-              <p>Trabalhos podem ocorrer em paralelo através de branches. Pull requests permitem revisão, discussão e checagem antes do merge final.</p>
+              <h3>Validação humana</h3>
+              <p>A revisão do time garante que a solução siga direção certa, qualidade e segurança.</p>
             </div>
           </div>
 
           <div class="step">
             <div class="step-number">04</div>
             <div>
-              <h3>Proteção de ambiente e segurança</h3>
-              <p>O GitHub ajuda a manter credenciais e variáveis sensíveis fora do repositório, com uso de .gitignore e arquivos .env em ambientes locais e de deploy.</p>
+              <h3>Commit, merge e publicação</h3>
+              <p>Com a validação concluída, a entrega entra no fluxo de GitHub com rastreabilidade e contexto.</p>
             </div>
           </div>
-
-          <div class="step">
-            <div class="step-number">05</div>
-            <div>
-              <h3>Testes e garantia de qualidade</h3>
-              <p>Um projeto com testes integrados ao fluxo fica mais confiável. O repositório centraliza e documenta casos de uso, regressões e validações.</p>
-            </div>
-          </div>
-
-          <div class="step">
-            <div class="step-number">06</div>
-            <div>
-              <h3>Deploy e compartilhamento</h3>
-              <p>O código pode ser entregue em ambientes de produção, staging ou páginas públicas, com visibilidade clara para usuários e stakeholders.</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section id="vantagens">
-        <div class="section-head">
-          <h2>Vantagens para o seu projeto</h2>
-          <p>Além do código, o GitHub agrega valor em governança, produtividade, segurança e documentação do trabalho.</p>
-        </div>
-
-        <div class="quote">
-          “O GitHub não é só para programadores: é uma ferramenta de gestão, apresentação, governança e evolução de produtos digitais. Ele ajuda a manter o projeto vivo, seguro e rastreável.”
-        </div>
-
-        <div class="grid-3" style="margin-top: 18px;">
-          <article class="card">
-            <div class="icon">🔒</div>
-            <h3>Segurança</h3>
-            <p>O GitHub facilita o controle de segredos, uso de .env, arquivos ignorados pelo .gitignore e regras para evitar vazamento de credenciais.</p>
-          </article>
-
-          <article class="card">
-            <div class="icon">📝</div>
-            <h3>Documentação</h3>
-            <p>README, documentação técnica, guias de uso e instruções de ambiente deixam o projeto compreensível para novos integrantes e clientes.</p>
-          </article>
-
-          <article class="card">
-            <div class="icon">✅</div>
-            <h3>Testes e qualidade</h3>
-            <p>Testes automatizados e revisão de código ajudam a reduzir regressões e aumentam a confiança da entrega em produção.</p>
-          </article>
-        </div>
-      </section>
-
-      <section id="proximos">
-        <div class="section-head">
-          <h2>Próximos passos</h2>
-          <p>Com a base do projeto já criada, o próximo passo é evoluir para um fluxo de trabalho profissional, com melhores práticas de Git, segurança e publicação.</p>
-        </div>
-
-        <div class="grid-3">
-          <article class="card">
-            <div class="icon">🔐</div>
-            <h3>Login e usuários</h3>
-            <p>Adicionar autenticação para diferenciar acessos por perfil, controlar permissões e garantir segurança do sistema.</p>
-          </article>
-
-          <article class="card">
-            <div class="icon">🗄️</div>
-            <h3>Banco de dados</h3>
-            <p>Conectar o painel a um banco real para dados compartilhados, atualizações em tempo real e multipessoas colaborando no mesmo contexto.</p>
-          </article>
-
-          <article class="card">
-            <div class="icon">🌐</div>
-            <h3>Publicação e CI/CD</h3>
-            <p>Planejar deploy público, páginas web, integração contínua e automatização de testes para reduzir falhas e acelerar entregas.</p>
-          </article>
         </div>
       </section>
     </main>
 
     <footer>
-      PulseBoard • Projeto digital com foco em produtividade, apresentação e crescimento.
+      GitHub + IA • organização, automação, documentação e controle humano.
     </footer>
+
+    <script>
+      const tabs = document.querySelectorAll('.tab');
+      const panels = document.querySelectorAll('.tab-panel');
+
+      tabs.forEach((tab) => {
+        tab.addEventListener('click', () => {
+          const target = tab.dataset.tab;
+          tabs.forEach((item) => item.classList.toggle('active', item === tab));
+          panels.forEach((panel) => panel.classList.toggle('active', panel.id === target));
+        });
+      });
+    </script>
   </body>
 </html>
