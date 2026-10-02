@@ -367,6 +367,14 @@ textarea { resize: vertical; }
 
 .ai-status.unconfigured i { background: #fbbf24; }
 
+.ai-status.demo {
+  color: #ddd6fe;
+  background: rgba(124, 58, 237, 0.1);
+  border-color: rgba(139, 92, 246, 0.28);
+}
+
+.ai-status.demo i { background: #a78bfa; }
+
 .ai-suggestions {
   display: flex;
   flex-wrap: wrap;

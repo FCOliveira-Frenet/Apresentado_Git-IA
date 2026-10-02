@@ -35,7 +35,11 @@ O assistente usa a API da OpenAI por um servidor Node.js. A chave fica no backen
 4. Abra `.env` e substitua o valor de `OPENAI_API_KEY` pela chave da API. O modelo padrão é `gpt-4.1-mini`; pode ser alterado em `OPENAI_MODEL` se estiver disponível na conta.
 5. Inicie com `npm start` e abra `http://localhost:3000`.
 
-O painel exibe o estado de configuração da API. Sem uma chave válida, o restante do dashboard continua disponível e o chat mostra uma mensagem de configuração.
+O painel exibe o estado de configuração. Sem uma chave válida, o chat entra em **modo demonstração** e gera uma resposta simulada localmente, usando as tarefas do navegador. Esse modo serve para demonstrar a interface e o fluxo, mas não consulta o ChatGPT.
+
+### GitHub e demonstração
+
+O código de exemplo da integração pode ficar no repositório GitHub; a chave secreta, não. Em hospedagem estática como GitHub Pages, não há backend Node para guardar a chave: o assistente funciona em modo demonstração e identifica as respostas como simuladas. Para respostas reais, hospede `server.js` em um serviço de backend, configure `OPENAI_API_KEY` nos secrets/variáveis privadas desse serviço e conecte o frontend ao endpoint HTTPS publicado. Não publique a chave em GitHub Actions logs, no HTML, no JavaScript do browser ou em commits.
 
 ### Uso e privacidade
 

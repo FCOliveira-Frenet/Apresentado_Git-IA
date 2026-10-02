@@ -391,8 +391,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const aiError = document.getElementById('ai-error');
   const aiStatus = document.querySelector('.ai-status');
   const aiHistory = [];
+  let aiMode = 'demo';
 
-  function appendAiMessage(role, content) {
+  function appendAiMessage(role, content, authorLabel) {
     const message = document.createElement('article');
     message.className = `ai-message ${role === 'user' ? 'user-message' : 'assistant-message'}`;
 
@@ -403,7 +404,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const body = document.createElement('div');
     body.className = 'message-content';
     const author = document.createElement('strong');
-    author.textContent = role === 'user' ? 'Você' : 'ChatGPT';
+    author.textContent = authorLabel || (role === 'user' ? 'Você' : 'ChatGPT');
     const text = document.createElement('p');
     text.textContent = content;
     body.append(author, text);
@@ -417,12 +418,52 @@ document.addEventListener('DOMContentLoaded', () => {
       const response = await fetch('/api/health');
       if (!response.ok) throw new Error('API indisponível');
       const status = await response.json();
+      aiMode = status.configured ? 'live' : 'demo';
       aiStatus.classList.toggle('unconfigured', !status.configured);
-      aiStatus.lastChild.textContent = status.configured ? ' API conectada' : ' Configure a API';
+      aiStatus.classList.toggle('demo', !status.configured);
+      aiStatus.lastChild.textContent = status.configured ? ' API conectada' : ' Modo demonstração';
     } catch (_error) {
-      aiStatus.classList.add('unconfigured');
-      aiStatus.lastChild.textContent = ' Inicie o servidor';
+      aiMode = 'demo';
+      aiStatus.classList.remove('unconfigured');
+      aiStatus.classList.add('demo');
+      aiStatus.lastChild.textContent = ' Demonstração local';
     }
+  }
+
+  function buildDemoAnswer(question) {
+    const taskList = tasks.map((task) => ({
+      title: task.title,
+      date: task.date,
+      time: task.time || 'sem horário',
+      stage: STAGES[task.stage]?.label || 'Backlog',
+      priority: task.priority || 'media'
+    }));
+    const normalizedQuestion = question.toLowerCase();
+    const stageCounts = taskList.reduce((counts, task) => {
+      counts[task.stage] = (counts[task.stage] || 0) + 1;
+      return counts;
+    }, {});
+    const priorityOrder = { alta: 0, media: 1, baixa: 2 };
+    const priorities = taskList
+      .filter((task) => task.stage !== 'Concluído')
+      .sort((first, second) => priorityOrder[first.priority] - priorityOrder[second.priority]);
+
+    let example;
+    if (normalizedQuestion.includes('prioriz') || normalizedQuestion.includes('atenção')) {
+      example = priorities.length
+        ? `Sugestão de prioridade com base nos dados locais: comece por “${priorities[0].title}” (${priorities[0].priority}, ${priorities[0].date}, ${priorities[0].time}). Depois, confira prazo, dependências e esforço antes de reorganizar o dia.`
+        : 'Não encontrei tarefas pendentes nos dados locais. Adicione atividades para demonstrar uma sugestão de priorização.';
+    } else if (normalizedQuestion.includes('resum')) {
+      const stageSummary = Object.entries(stageCounts).map(([stage, count]) => `${stage}: ${count}`).join(' • ');
+      example = `Encontrei ${taskList.length} tarefa(s) no painel. Distribuição por etapa: ${stageSummary || 'sem tarefas cadastradas'}. Próximo passo: revise prazos e prioridades, especialmente as atividades ainda não concluídas.`;
+    } else {
+      const nextTasks = priorities.slice(0, 3).map((task) => `“${task.title}” (${task.date}, ${task.time})`).join('; ');
+      example = nextTasks
+        ? `Como exemplo de planejamento, revise primeiro estas atividades abertas: ${nextTasks}. Reserve blocos de tempo, considere dependências e mova cada tarefa de etapa apenas quando o trabalho realmente avançar.`
+        : 'Como exemplo, agrupe tarefas por prazo e esforço, reserve blocos de foco e atualize o pipeline conforme o andamento real.';
+    }
+
+    return `Demonstração simulada — esta resposta foi montada localmente para mostrar a experiência; não veio do ChatGPT nem da API.\n\n${example}\n\nA demonstração usa os dados atuais do navegador. Configure OPENAI_API_KEY no backend para receber respostas reais.`;
   }
 
   async function sendAiMessage(message) {
@@ -431,12 +472,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
     aiError.hidden = true;
     appendAiMessage('user', question);
-    aiHistory.push({ role: 'user', content: question });
     aiInput.value = '';
     aiSendButton.disabled = true;
     aiSendButton.textContent = 'Consultando…';
 
     try {
+      if (aiMode === 'demo') {
+        const answer = buildDemoAnswer(question);
+        appendAiMessage('assistant', answer, 'Demonstração');
+        return;
+      }
+
+      aiHistory.push({ role: 'user', content: question });
       const response = await fetch('/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -454,6 +501,7 @@ document.addEventListener('DOMContentLoaded', () => {
       aiHistory.push({ role: 'assistant', content: result.answer });
       appendAiMessage('assistant', result.answer);
     } catch (error) {
+      if (aiHistory[aiHistory.length - 1]?.role === 'user') aiHistory.pop();
       aiError.textContent = error.message || 'Falha de conexão. Confira se o servidor está iniciado.';
       aiError.hidden = false;
     } finally {
