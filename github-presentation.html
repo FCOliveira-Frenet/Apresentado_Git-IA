@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GitHub para apresentação do projeto</title>
+    <style>
+      :root {
+        --bg: #0b1020;
+        --bg-2: #111827;
+        --panel: rgba(15, 23, 42, 0.82);
+        --card: #121a2d;
+        --primary: #7c3aed;
+        --primary-2: #22c55e;
+        --text: #e5edf7;
+        --muted: #a5b4cf;
+        --line: rgba(148, 163, 184, 0.26);
+      }
+
+      * { box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
+      body {
+        margin: 0;
+        font-family: Inter, "Segoe UI", sans-serif;
+        background: radial-gradient(circle at top left, rgba(124, 58, 237, 0.18), transparent 25%),
+                    radial-gradient(circle at bottom right, rgba(34, 197, 94, 0.12), transparent 20%),
+                    linear-gradient(135deg, var(--bg), var(--bg-2));
+        color: var(--text);
+      }
+
+      .container {
+        width: min(1120px, calc(100% - 32px));
+        margin: 0 auto;
+      }
+
+      header {
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        backdrop-filter: blur(12px);
+        background: rgba(11, 16, 32, 0.7);
+        border-bottom: 1px solid var(--line);
+      }
+
+      .nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        min-height: 72px;
+        gap: 20px;
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-weight: 700;
+      }
+
+      .brand-mark {
+        width: 36px;
+        height: 36px;
+        display: grid;
+        place-items: center;
+        border-radius: 12px;
+        background: linear-gradient(135deg, var(--primary), #8b5cf6);
+        box-shadow: 0 10px 24px rgba(124, 58, 237, 0.35);
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 16px;
+        flex-wrap: wrap;
+      }
+
+      .nav-links a {
+        color: var(--muted);
+        text-decoration: none;
+        font-size: 0.93rem;
+      }
+
+      .hero {
+        padding: 88px 0 64px;
+      }
+
+      .hero-grid {
+        display: grid;
+        grid-template-columns: 1.2fr 0.8fr;
+        gap: 30px;
+        align-items: center;
+      }
+
+      .eyebrow {
+        display: inline-block;
+        padding: 8px 12px;
+        border: 1px solid rgba(124, 58, 237, 0.4);
+        background: rgba(124, 58, 237, 0.12);
+        color: #d8c7ff;
+        border-radius: 999px;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        font-size: 0.7rem;
+        font-weight: 700;
+      }
+
+      h1 {
+        font-size: clamp(2.8rem, 5vw, 5rem);
+        line-height: 1.05;
+        margin: 18px 0 16px;
+      }
+
+      .lead {
+        color: var(--muted);
+        font-size: 1.08rem;
+        line-height: 1.7;
+        max-width: 640px;
+      }
+
+      .cta-row {
+        margin-top: 28px;
+        display: flex;
+        gap: 14px;
+        flex-wrap: wrap;
+      }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 12px;
+        padding: 0.9rem 1.2rem;
+        text-decoration: none;
+        font-weight: 700;
+        transition: 0.2s ease;
+      }
+
+      .btn.primary {
+        background: linear-gradient(135deg, var(--primary), #8b5cf6);
+        color: white;
+      }
+
+      .btn.secondary {
+        border: 1px solid var(--line);
+        background: rgba(148, 163, 184, 0.04);
+        color: var(--text);
+      }
+
+      .hero-card {
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 26px;
+        padding: 22px;
+        box-shadow: 0 24px 60px rgba(15, 23, 42, 0.42);
+      }
+
+      .mini-title {
+        color: var(--muted);
+        font-size: 0.76rem;
+        text-transform: uppercase;
+        letter-spacing: 0.14em;
+      }
+
+      .stat-list {
+        margin-top: 18px;
+        display: grid;
+        gap: 14px;
+      }
+
+      .stat-item {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 14px 16px;
+        border-radius: 14px;
+        background: rgba(148, 163, 184, 0.04);
+        border: 1px solid var(--line);
+      }
+
+      .stat-item strong { font-size: 1.2rem; }
+
+      section {
+        padding: 28px 0 20px;
+      }
+
+      .section-head {
+        margin-bottom: 24px;
+      }
+
+      .section-head h2 {
+        font-size: clamp(2rem, 2vw, 3rem);
+        margin: 0 0 10px;
+      }
+
+      .section-head p {
+        margin: 0;
+        color: var(--muted);
+      }
+
+      .grid-3 {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 18px;
+      }
+
+      .card {
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 22px;
+        padding: 24px 20px;
+      }
+
+      .card .icon {
+        width: 42px;
+        height: 42px;
+        display: grid;
+        place-items: center;
+        border-radius: 12px;
+        background: rgba(124, 58, 237, 0.12);
+        margin-bottom: 16px;
+        font-size: 1.4rem;
+      }
+
+      .card h3 {
+        margin: 0 0 10px;
+        font-size: 1.2rem;
+      }
+
+      .card p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.7;
+      }
+
+      .timeline {
+        display: grid;
+        gap: 16px;
+      }
+
+      .step {
+        display: grid;
+        grid-template-columns: 90px 1fr;
+        gap: 18px;
+        align-items: start;
+        background: rgba(148, 163, 184, 0.04);
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        padding: 18px 20px;
+      }
+
+      .step-number {
+        width: 56px;
+        height: 56px;
+        border-radius: 16px;
+        display: grid;
+        place-items: center;
+        background: linear-gradient(135deg, var(--primary), #312e81);
+        font-weight: 800;
+      }
+
+      .step h3 {
+        margin: 0 0 8px;
+      }
+
+      .step p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.7;
+      }
+
+      .quote {
+        background: linear-gradient(135deg, rgba(124, 58, 237, 0.12), rgba(34, 197, 94, 0.1));
+        border: 1px solid var(--line);
+        border-radius: 22px;
+        padding: 28px 24px;
+        font-size: 1.1rem;
+        line-height: 1.8;
+      }
+
+      footer {
+        padding: 48px 0 80px;
+        text-align: center;
+        color: var(--muted);
+      }
+
+      @media (max-width: 920px) {
+        .hero-grid,
+        .grid-3 {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="container nav">
+        <div class="brand">
+          <div class="brand-mark">G</div>
+          <span>GitHub</span>
+        </div>
+        <nav class="nav-links">
+          <a href="#porque">Por que usar</a>
+          <a href="#fluxo">Fluxo</a>
+          <a href="#vantagens">Vantagens</a>
+          <a href="#proximos">Próximos passos</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="container">
+      <section class="hero">
+        <div class="hero-grid">
+          <div>
+            <span class="eyebrow">Apresentação</span>
+            <h1>GitHub como base para entregar projetos digitais.</h1>
+            <p class="lead">
+              O GitHub transforma ideias em projetos organizados, rastreáveis e prontos para evolução.
+              Ele é o espaço ideal para versionar código, acompanhar entregas e mostrar trabalho para clientes, time e stakeholders.
+            </p>
+            <div class="cta-row">
+              <a class="btn primary" href="#porque">Entender melhor</a>
+              <a class="btn secondary" href="#fluxo">Ver o fluxo</a>
+            </div>
+          </div>
+
+          <div class="hero-card">
+            <div class="mini-title">Resumo do projeto</div>
+            <div class="stat-list">
+              <div class="stat-item">
+                <span>Repositório</span>
+                <strong>PulseBoard</strong>
+              </div>
+              <div class="stat-item">
+                <span>Objetivo</span>
+                <strong>Dashboard</strong>
+              </div>
+              <div class="stat-item">
+                <span>Status</span>
+                <strong>Ativo</strong>
+              </div>
+              <div class="stat-item">
+                <span>Entregas</span>
+                <strong>Git + Web</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="porque">
+        <div class="section-head">
+          <h2>Por que usar GitHub?</h2>
+          <p>Porque ele representa organização, disciplina e profissionalismo em qualquer projeto.</p>
+        </div>
+
+        <div class="grid-3">
+          <article class="card">
+            <div class="icon">📦</div>
+            <h3>Versionamento</h3>
+            <p>Você guarda cada mudança do projeto, reverte erros e acompanha a evolução da ideia com clareza.</p>
+          </article>
+
+          <article class="card">
+            <div class="icon">🤝</div>
+            <h3>Colaboração</h3>
+            <p>Time, clientes e parceiros conseguem acompanhar evolução, revisar mudanças e trabalhar em paralelo.</p>
+          </article>
+
+          <article class="card">
+            <div class="icon">🚀</div>
+            <h3>Apresentação profissional</h3>
+            <p>Um repositório bem estruturado comunica seriedade, organização e maturidade do produto.</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="fluxo">
+        <div class="section-head">
+          <h2>Fluxo de trabalho</h2>
+          <p>Um projeto saudável no GitHub segue uma lógica simples e eficiente.</p>
+        </div>
+
+        <div class="timeline">
+          <div class="step">
+            <div class="step-number">01</div>
+            <div>
+              <h3>Criação do repositório</h3>
+              <p>O projeto nasce em um espaço central, com estrutura clara e organização inicial do código.</p>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-number">02</div>
+            <div>
+              <h3>Commits e versionamento</h3>
+              <p>Cada avanço é registrado em commits com mensagens objetivas, mostrando a evolução real do trabalho.</p>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-number">03</div>
+            <div>
+              <h3>Branches e revisões</h3>
+              <p>Trabalhos podem ser feitos em paralelo, com revisão e aprovação antes de chegarem ao produto final.</p>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-number">04</div>
+            <div>
+              <h3>Deploy e compartilhamento</h3>
+              <p>O projeto pode ser publicado em páginas, hospedagens ou integrados com ferramentas de apresentação.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="vantagens">
+        <div class="section-head">
+          <h2>Vantagens para o seu projeto</h2>
+          <p>Além do código, o GitHub agregou valor à comunicação e ao controle.</p>
+        </div>
+
+        <div class="quote">
+          “O GitHub não é só para programadores: é uma ferramenta de gestão, apresentação e evolução de produtos digitais.”
+        </div>
+      </section>
+
+      <section id="proximos">
+        <div class="section-head">
+          <h2>Próximos passos</h2>
+          <p>Com a base do projeto já criada, o próximo passo é ampliar a apresentação e a entrega.</p>
+        </div>
+
+        <div class="grid-3">
+          <article class="card">
+            <div class="icon">🔐</div>
+            <h3>Login e usuários</h3>
+            <p>Adicionar autenticação para diferenciar pessoas, permissões e acesso por perfil.</p>
+          </article>
+
+          <article class="card">
+            <div class="icon">🗄️</div>
+            <h3>Banco de dados</h3>
+            <p>Conectar o painel a um banco real para dados compartilhados entre diferentes usuários.</p>
+          </article>
+
+          <article class="card">
+            <div class="icon">🌐</div>
+            <h3>Publicação</h3>
+            <p>Planejar deploy público, páginas web e visualização do projeto para outras pessoas.</p>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      PulseBoard • Projeto digital com foco em produtividade, apresentação e crescimento.
+    </footer>
+  </body>
+</html>
