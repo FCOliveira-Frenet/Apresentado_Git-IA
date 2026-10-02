@@ -231,6 +231,13 @@
         line-height: 1.7;
       }
 
+      .list-compact {
+        margin: 12px 0 0;
+        padding-left: 18px;
+        color: var(--muted);
+        line-height: 1.8;
+      }
+
       .timeline {
         display: grid;
         gap: 16px;
@@ -349,26 +356,41 @@
       <section id="porque">
         <div class="section-head">
           <h2>Por que usar GitHub?</h2>
-          <p>Porque ele representa organização, disciplina e profissionalismo em qualquer projeto.</p>
+          <p>Porque ele representa organização, disciplina e profissionalismo em qualquer projeto, principalmente em times que trabalham de forma distribuída ou colaborativa.</p>
         </div>
 
         <div class="grid-3">
           <article class="card">
             <div class="icon">📦</div>
             <h3>Versionamento</h3>
-            <p>Você guarda cada mudança do projeto, reverte erros e acompanha a evolução da ideia com clareza.</p>
+            <p>Você guarda cada mudança do projeto, reverte erros, compara commits e mantém histórico claro do que foi alterado e por quê.</p>
+            <ul class="list-compact">
+              <li>Histórico completo do projeto</li>
+              <li>Rollback seguro</li>
+              <li>Rastreamento de decisões técnicas</li>
+            </ul>
           </article>
 
           <article class="card">
             <div class="icon">🤝</div>
-            <h3>Colaboração</h3>
-            <p>Time, clientes e parceiros conseguem acompanhar evolução, revisar mudanças e trabalhar em paralelo.</p>
+            <h3>Colaboração em equipe</h3>
+            <p>GitHub permite que várias pessoas trabalhem em paralelo com branches, pull requests, revisão de código e merges controlados.</p>
+            <ul class="list-compact">
+              <li>Branches por feature ou tarefa</li>
+              <li>Pull requests com revisão</li>
+              <li>Menos conflitos e mais previsibilidade</li>
+            </ul>
           </article>
 
           <article class="card">
             <div class="icon">🚀</div>
-            <h3>Apresentação profissional</h3>
-            <p>Um repositório bem estruturado comunica seriedade, organização e maturidade do produto.</p>
+            <h3>Organização e entrega</h3>
+            <p>Um repositório bem estruturado comunica maturidade, facilita a manutenção e reforça a confiança na entrega do produto.</p>
+            <ul class="list-compact">
+              <li>Fluxo contínuo de entregas</li>
+              <li>Documentação e contexto preservados</li>
+              <li>Visão profissional para clientes e stakeholders</li>
+            </ul>
           </article>
         </div>
       </section>
@@ -376,7 +398,7 @@
       <section id="fluxo">
         <div class="section-head">
           <h2>Fluxo de trabalho</h2>
-          <p>Um projeto saudável no GitHub segue uma lógica simples e eficiente.</p>
+          <p>Um projeto saudável no GitHub segue uma lógica simples, mas extremamente poderosa para times e entregas contínuas.</p>
         </div>
 
         <div class="timeline">
@@ -384,7 +406,7 @@
             <div class="step-number">01</div>
             <div>
               <h3>Criação do repositório</h3>
-              <p>O projeto nasce em um espaço central, com estrutura clara e organização inicial do código.</p>
+              <p>O projeto nasce em um ponto central de verdade: estrutura inicial, arquivos organizados, documentação e regras mínimas de versionamento.</p>
             </div>
           </div>
 
@@ -392,7 +414,7 @@
             <div class="step-number">02</div>
             <div>
               <h3>Commits e versionamento</h3>
-              <p>Cada avanço é registrado em commits com mensagens objetivas, mostrando a evolução real do trabalho.</p>
+              <p>Cada avanço é registrado em commits com mensagens objetivas, mostrando evolução, contexto e rastreabilidade do que foi alterado.</p>
             </div>
           </div>
 
@@ -400,15 +422,31 @@
             <div class="step-number">03</div>
             <div>
               <h3>Branches e revisões</h3>
-              <p>Trabalhos podem ser feitos em paralelo, com revisão e aprovação antes de chegarem ao produto final.</p>
+              <p>Trabalhos podem ocorrer em paralelo através de branches. Pull requests permitem revisão, discussão e checagem antes do merge final.</p>
             </div>
           </div>
 
           <div class="step">
             <div class="step-number">04</div>
             <div>
+              <h3>Proteção de ambiente e segurança</h3>
+              <p>O GitHub ajuda a manter credenciais e variáveis sensíveis fora do repositório, com uso de .gitignore e arquivos .env em ambientes locais e de deploy.</p>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-number">05</div>
+            <div>
+              <h3>Testes e garantia de qualidade</h3>
+              <p>Um projeto com testes integrados ao fluxo fica mais confiável. O repositório centraliza e documenta casos de uso, regressões e validações.</p>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-number">06</div>
+            <div>
               <h3>Deploy e compartilhamento</h3>
-              <p>O projeto pode ser publicado em páginas, hospedagens ou integrados com ferramentas de apresentação.</p>
+              <p>O código pode ser entregue em ambientes de produção, staging ou páginas públicas, com visibilidade clara para usuários e stakeholders.</p>
             </div>
           </div>
         </div>
@@ -417,37 +455,57 @@
       <section id="vantagens">
         <div class="section-head">
           <h2>Vantagens para o seu projeto</h2>
-          <p>Além do código, o GitHub agregou valor à comunicação e ao controle.</p>
+          <p>Além do código, o GitHub agrega valor em governança, produtividade, segurança e documentação do trabalho.</p>
         </div>
 
         <div class="quote">
-          “O GitHub não é só para programadores: é uma ferramenta de gestão, apresentação e evolução de produtos digitais.”
+          “O GitHub não é só para programadores: é uma ferramenta de gestão, apresentação, governança e evolução de produtos digitais. Ele ajuda a manter o projeto vivo, seguro e rastreável.”
+        </div>
+
+        <div class="grid-3" style="margin-top: 18px;">
+          <article class="card">
+            <div class="icon">🔒</div>
+            <h3>Segurança</h3>
+            <p>O GitHub facilita o controle de segredos, uso de .env, arquivos ignorados pelo .gitignore e regras para evitar vazamento de credenciais.</p>
+          </article>
+
+          <article class="card">
+            <div class="icon">📝</div>
+            <h3>Documentação</h3>
+            <p>README, documentação técnica, guias de uso e instruções de ambiente deixam o projeto compreensível para novos integrantes e clientes.</p>
+          </article>
+
+          <article class="card">
+            <div class="icon">✅</div>
+            <h3>Testes e qualidade</h3>
+            <p>Testes automatizados e revisão de código ajudam a reduzir regressões e aumentam a confiança da entrega em produção.</p>
+          </article>
         </div>
       </section>
 
       <section id="proximos">
         <div class="section-head">
           <h2>Próximos passos</h2>
-          <p>Com a base do projeto já criada, o próximo passo é ampliar a apresentação e a entrega.</p>
+          <p>Com a base do projeto já criada, o próximo passo é evoluir para um fluxo de trabalho profissional, com melhores práticas de Git, segurança e publicação.</p>
         </div>
 
         <div class="grid-3">
           <article class="card">
             <div class="icon">🔐</div>
             <h3>Login e usuários</h3>
-            <p>Adicionar autenticação para diferenciar pessoas, permissões e acesso por perfil.</p>
+            <p>Adicionar autenticação para diferenciar acessos por perfil, controlar permissões e garantir segurança do sistema.</p>
           </article>
 
           <article class="card">
             <div class="icon">🗄️</div>
             <h3>Banco de dados</h3>
-            <p>Conectar o painel a um banco real para dados compartilhados entre diferentes usuários.</p>
+            <p>Conectar o painel a um banco real para dados compartilhados, atualizações em tempo real e multipessoas colaborando no mesmo contexto.</p>
           </article>
 
           <article class="card">
             <div class="icon">🌐</div>
-            <h3>Publicação</h3>
-            <p>Planejar deploy público, páginas web e visualização do projeto para outras pessoas.</p>
+            <h3>Publicação e CI/CD</h3>
+            <p>Planejar deploy público, páginas web, integração contínua e automatização de testes para reduzir falhas e acelerar entregas.</p>
           </article>
         </div>
       </section>
