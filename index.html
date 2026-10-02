@@ -26,7 +26,6 @@
         <button class="nav-item" type="button"><span>▣</span> Pipeline</button>
         <button class="nav-item" type="button"><span>◌</span> Calendário</button>
         <button class="nav-item" type="button"><span>◎</span> Equipe</button>
-        <button class="nav-item" id="open-ai-assistant" type="button"><span>✦</span> Assistente IA</button>
       </nav>
 
       <div class="sidebar-panel">
@@ -82,43 +81,6 @@
           <strong id="done-tasks">0</strong>
           <small>Entregas</small>
         </article>
-      </section>
-
-      <section class="ai-assistant" id="ai-assistant" aria-labelledby="ai-title">
-        <div class="ai-heading">
-          <div>
-            <span class="eyebrow">ChatGPT • PulseBoard</span>
-            <h2 id="ai-title">Assistente de produtividade</h2>
-            <p>Pergunte sobre sua agenda, prioridades ou como organizar as próximas entregas.</p>
-          </div>
-          <span class="ai-status demo"><i></i> Demonstração local</span>
-        </div>
-
-        <div class="ai-suggestions" aria-label="Sugestões de perguntas">
-          <button type="button" data-ai-prompt="Resuma minhas tarefas e destaque o que merece atenção primeiro.">Resumir minhas tarefas</button>
-          <button type="button" data-ai-prompt="Ajude-me a priorizar minhas atividades de hoje e explique o critério.">Priorizar hoje</button>
-          <button type="button" data-ai-prompt="Sugira uma organização realista para minhas próximas tarefas.">Planejar próximas tarefas</button>
-        </div>
-
-        <div class="ai-messages" id="ai-messages" role="log" aria-live="polite" aria-relevant="additions text">
-          <article class="ai-message assistant-message">
-            <span class="message-avatar">✦</span>
-            <div class="message-content">
-              <strong>Assistente</strong>
-              <p>Olá! Posso ajudar a resumir e priorizar suas tarefas. Sem uma API configurada, o painel usa uma simulação local claramente identificada.</p>
-            </div>
-          </article>
-        </div>
-
-        <form class="ai-composer" id="ai-chat-form">
-          <label class="sr-only" for="ai-input">Sua pergunta para o ChatGPT</label>
-          <textarea id="ai-input" name="message" rows="2" maxlength="4000" placeholder="Pergunte sobre suas tarefas..." required></textarea>
-          <div class="ai-composer-footer">
-            <small>Revise informações importantes. A IA não altera tarefas nem executa commits.</small>
-            <button class="primary-btn" id="ai-send-button" type="submit">Enviar pergunta <span>↗</span></button>
-          </div>
-        </form>
-        <p class="ai-error" id="ai-error" role="alert" hidden></p>
       </section>
 
       <section class="workspace">
