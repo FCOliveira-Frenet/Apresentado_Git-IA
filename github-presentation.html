@@ -334,6 +334,166 @@
         line-height: 1.7;
       }
 
+      .demo-layout {
+        display: grid;
+        grid-template-columns: minmax(0, 1.4fr) minmax(240px, 0.6fr);
+        gap: 18px;
+      }
+
+      .demo-chat,
+      .demo-info {
+        background: rgba(148, 163, 184, 0.04);
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        padding: 18px;
+      }
+
+      .demo-chat-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        margin-bottom: 14px;
+      }
+
+      .demo-chat-head h3,
+      .demo-info h3 { margin: 0; }
+
+      .demo-api-status {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        border: 1px solid rgba(139, 92, 246, 0.35);
+        border-radius: 999px;
+        padding: 7px 10px;
+        color: #ddd6fe;
+        background: rgba(139, 92, 246, 0.1);
+        font-size: 0.72rem;
+        font-weight: 700;
+      }
+
+      .demo-api-status::before {
+        content: "";
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: #a78bfa;
+      }
+
+      .demo-api-status.live {
+        color: #bbf7d0;
+        background: rgba(34, 197, 94, 0.08);
+        border-color: rgba(34, 197, 94, 0.35);
+      }
+
+      .demo-api-status.live::before { background: #4ade80; }
+
+      .demo-prompts {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-bottom: 12px;
+      }
+
+      .demo-prompts button {
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        padding: 8px 11px;
+        color: #ddd6fe;
+        background: rgba(139, 92, 246, 0.08);
+        font: inherit;
+        font-size: 0.76rem;
+        cursor: pointer;
+      }
+
+      .demo-prompts button:hover { background: rgba(139, 92, 246, 0.18); }
+
+      .demo-messages {
+        display: grid;
+        gap: 10px;
+        min-height: 160px;
+        max-height: 320px;
+        overflow-y: auto;
+        padding: 4px 2px 12px;
+      }
+
+      .demo-message {
+        max-width: 92%;
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        padding: 11px 13px;
+        background: rgba(2, 6, 23, 0.3);
+      }
+
+      .demo-message.user { justify-self: end; background: rgba(139, 92, 246, 0.12); }
+
+      .demo-message strong {
+        display: block;
+        margin-bottom: 5px;
+        font-size: 0.74rem;
+      }
+
+      .demo-message p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.65;
+        white-space: pre-wrap;
+        overflow-wrap: anywhere;
+      }
+
+      .demo-form {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 10px;
+        align-items: end;
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        padding: 10px;
+        background: rgba(2, 6, 23, 0.3);
+      }
+
+      .demo-form textarea {
+        width: 100%;
+        resize: vertical;
+        min-height: 50px;
+        border: 0;
+        outline: none;
+        background: transparent;
+        color: var(--text);
+        font: inherit;
+      }
+
+      .demo-form button {
+        border: 0;
+        border-radius: 10px;
+        padding: 11px 14px;
+        background: linear-gradient(135deg, var(--primary), #7c3aed);
+        color: white;
+        font: inherit;
+        font-weight: 700;
+        cursor: pointer;
+      }
+
+      .demo-form button:disabled { opacity: 0.65; cursor: wait; }
+
+      .demo-notice,
+      .demo-error {
+        margin: 10px 0 0;
+        color: var(--muted);
+        font-size: 0.78rem;
+        line-height: 1.6;
+      }
+
+      .demo-error { color: #fecaca; }
+
+      .demo-info p,
+      .demo-info li {
+        color: var(--muted);
+        line-height: 1.7;
+      }
+
+      .demo-info ol { padding-left: 20px; }
+
       .timeline {
         display: grid;
         gap: 16px;
@@ -377,7 +537,13 @@
       }
 
       @media (max-width: 920px) {
-        .hero-grid, .pane-grid { grid-template-columns: 1fr; }
+        .hero-grid, .pane-grid, .demo-layout { grid-template-columns: 1fr; }
+      }
+
+      @media (max-width: 640px) {
+        .demo-chat-head { align-items: flex-start; flex-direction: column; }
+        .demo-form { grid-template-columns: 1fr; }
+        .demo-form button { justify-self: end; }
       }
     </style>
   </head>
@@ -393,6 +559,7 @@
           <a href="#visao">Visão geral</a>
           <a href="#fluxo-ia">Fluxo</a>
           <a href="#visao" data-open-tab="skills">Skills</a>
+          <a href="#visao" data-open-tab="chat-demo">Testar IA</a>
           <a href="#visao" data-open-tab="security">Segurança</a>
         </nav>
       </div>
@@ -410,7 +577,7 @@
             </p>
 
             <div class="cta-row">
-              <a class="btn primary" href="#visao">Explorar painel</a>
+              <a class="btn primary" href="#visao" data-open-tab="chat-demo">Testar ChatGPT</a>
               <a class="btn secondary" href="#fluxo-ia">Ver o fluxo</a>
             </div>
           </div>
@@ -418,7 +585,7 @@
           <div class="hero-card">
             <div class="mini-title">Visão operacional</div>
             <div class="stat-list">
-              <div class="stat-item"><span>Agente</span><strong>GitHub Copilot</strong></div>
+              <div class="stat-item"><span>Agente</span><strong>ChatGPT API</strong></div>
               <div class="stat-item"><span>Contexto</span><strong>Repositório</strong></div>
               <div class="stat-item"><span>Skills</span><strong>Especializadas</strong></div>
               <div class="stat-item"><span>Controle</span><strong>Humano</strong></div>
@@ -433,6 +600,7 @@
           <button id="tab-workflow" class="tab" type="button" role="tab" aria-selected="false" aria-controls="workflow" data-tab="workflow">Fluxo de trabalho</button>
           <button id="tab-skills" class="tab" type="button" role="tab" aria-selected="false" aria-controls="skills" data-tab="skills">Skills e automações</button>
           <button id="tab-setup-ai" class="tab" type="button" role="tab" aria-selected="false" aria-controls="setup-ai" data-tab="setup-ai">Configuração Git + IA</button>
+          <button id="tab-chat-demo" class="tab" type="button" role="tab" aria-selected="false" aria-controls="chat-demo" data-tab="chat-demo">Testar ChatGPT</button>
           <button id="tab-security" class="tab" type="button" role="tab" aria-selected="false" aria-controls="security" data-tab="security">Permissões e segurança</button>
         </div>
 
@@ -644,6 +812,57 @@ Não faça push nem merge sem minha confirmação."</div>
           </div>
         </div>
 
+        <div id="chat-demo" class="tab-panel" role="tabpanel" aria-labelledby="tab-chat-demo" tabindex="0">
+          <div class="section-head">
+            <h2>Experimente a integração</h2>
+            <p>Digite uma pergunta e veja o percurso entre a interface, o backend seguro e a API. Sem backend configurado, a página apresenta uma simulação identificada.</p>
+          </div>
+
+          <div class="demo-layout">
+            <div class="demo-chat">
+              <div class="demo-chat-head">
+                <h3>Assistente de demonstração</h3>
+                <span id="demo-api-status" class="demo-api-status">Verificando modo…</span>
+              </div>
+
+              <div class="demo-prompts" aria-label="Perguntas de exemplo">
+                <button type="button" data-demo-prompt="O que é possível automatizar com uma API de IA no GitHub?">Automação no GitHub</button>
+                <button type="button" data-demo-prompt="Como manter a chave da API segura neste projeto?">Segurança da chave</button>
+                <button type="button" data-demo-prompt="Sugira um fluxo de IA, revisão por pull request e deploy.">Fluxo com pull request</button>
+              </div>
+
+              <div id="demo-messages" class="demo-messages" role="log" aria-live="polite" aria-relevant="additions text">
+                <article class="demo-message">
+                  <strong>Assistente</strong>
+                  <p>Olá! Faça uma pergunta sobre GitHub e IA. O indicador informa se a resposta será real ou simulada.</p>
+                </article>
+              </div>
+
+              <form id="demo-chat-form" class="demo-form">
+                <label class="sr-only" for="demo-chat-input">Sua pergunta</label>
+                <textarea id="demo-chat-input" maxlength="4000" placeholder="Ex.: Como a IA ajuda a revisar um pull request?" required></textarea>
+                <button id="demo-chat-send" type="submit">Enviar pergunta</button>
+              </form>
+              <p id="demo-chat-notice" class="demo-notice">A simulação não chama a OpenAI nem usa uma chave real.</p>
+              <p id="demo-chat-error" class="demo-error" role="alert" hidden></p>
+            </div>
+
+            <aside class="demo-info">
+              <h3>O que acontece ao enviar</h3>
+              <ol>
+                <li>A página recebe o texto digitado.</li>
+                <li>Com backend configurado, envia a pergunta ao endpoint protegido do projeto.</li>
+                <li>O backend usa a chave privada para chamar a API da OpenAI.</li>
+                <li>A resposta volta para a página; a chave nunca vai ao navegador.</li>
+              </ol>
+              <p><strong>Publicação estática:</strong> GitHub Pages pode mostrar o modo simulado. Para respostas reais, hospede o backend e configure a chave como secret no servidor — nunca no GitHub repository ou nos arquivos frontend.</p>
+              <div class="code-block">Página → /api/chat → backend
+backend + OPENAI_API_KEY → OpenAI
+resposta → página</div>
+            </aside>
+          </div>
+        </div>
+
         <div id="security" class="tab-panel" role="tabpanel" aria-labelledby="tab-security" tabindex="0">
           <div class="pane-grid">
             <div class="feature-stack">
@@ -723,6 +942,15 @@ Não faça push nem merge sem minha confirmação."</div>
     <script>
       const tabs = document.querySelectorAll('.tab');
       const panels = document.querySelectorAll('.tab-panel');
+      const demoChatForm = document.getElementById('demo-chat-form');
+      const demoChatInput = document.getElementById('demo-chat-input');
+      const demoChatMessages = document.getElementById('demo-messages');
+      const demoChatSend = document.getElementById('demo-chat-send');
+      const demoApiStatus = document.getElementById('demo-api-status');
+      const demoChatNotice = document.getElementById('demo-chat-notice');
+      const demoChatError = document.getElementById('demo-chat-error');
+      const demoChatHistory = [];
+      let demoChatMode = 'demo';
 
       function activateTab(target) {
         tabs.forEach((tab) => {
@@ -744,6 +972,103 @@ Não faça push nem merge sem minha confirmação."</div>
       document.querySelectorAll('[data-open-tab]').forEach((link) => {
         link.addEventListener('click', () => activateTab(link.dataset.openTab));
       });
+
+      function addDemoMessage(role, content, label) {
+        const message = document.createElement('article');
+        message.className = `demo-message ${role === 'user' ? 'user' : ''}`;
+        const author = document.createElement('strong');
+        author.textContent = label || (role === 'user' ? 'Você' : 'ChatGPT');
+        const text = document.createElement('p');
+        text.textContent = content;
+        message.append(author, text);
+        demoChatMessages.append(message);
+        demoChatMessages.scrollTop = demoChatMessages.scrollHeight;
+      }
+
+      function buildDemoReply(question) {
+        const normalizedQuestion = question.toLowerCase();
+        if (normalizedQuestion.includes('segur') || normalizedQuestion.includes('chave') || normalizedQuestion.includes('token')) {
+          return 'Guarde a chave da API somente como variável secreta no backend. O navegador deve chamar um endpoint do seu servidor, e o servidor chama a OpenAI. Não coloque a chave em HTML, JavaScript frontend, commits ou GitHub Pages. Esta resposta é uma simulação local.';
+        }
+        if (normalizedQuestion.includes('pull request') || normalizedQuestion.includes('fluxo') || normalizedQuestion.includes('automat')) {
+          return 'Um fluxo seguro pode ser: abrir uma branch, pedir à IA análise e sugestão, revisar o diff, executar testes, abrir um pull request e exigir revisão humana antes do merge. A IA pode ajudar a escrever o resumo e identificar riscos, mas não deve aprovar ou publicar sem autorização. Esta resposta é uma simulação local.';
+        }
+        return 'A integração permite enviar uma pergunta contextualizada ao backend, que consulta o modelo de IA e devolve uma resposta para a interface. Também pode ajudar a resumir mudanças, explicar código, sugerir testes e preparar descrições de pull request. Esta resposta é uma simulação local — configure o backend para consultar a OpenAI de verdade.';
+      }
+
+      async function refreshDemoApiStatus() {
+        try {
+          const response = await fetch('/api/health');
+          if (!response.ok) throw new Error('Backend indisponível');
+          const health = await response.json();
+          demoChatMode = health.configured ? 'live' : 'demo';
+        } catch (_error) {
+          demoChatMode = 'demo';
+        }
+
+        demoApiStatus.classList.toggle('live', demoChatMode === 'live');
+        demoApiStatus.textContent = demoChatMode === 'live' ? 'API real conectada' : 'Modo simulado';
+        demoChatNotice.textContent = demoChatMode === 'live'
+          ? 'Sua pergunta será enviada ao backend configurado e à API da OpenAI.'
+          : 'A simulação não chama a OpenAI nem usa uma chave real.';
+      }
+
+      document.querySelectorAll('[data-demo-prompt]').forEach((button) => {
+        button.addEventListener('click', () => {
+          demoChatInput.value = button.dataset.demoPrompt;
+          demoChatInput.focus();
+        });
+      });
+
+      demoChatForm.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        const question = demoChatInput.value.trim();
+        if (!question || demoChatSend.disabled) return;
+
+        demoChatError.hidden = true;
+        addDemoMessage('user', question);
+        demoChatInput.value = '';
+        demoChatSend.disabled = true;
+        demoChatSend.textContent = 'Consultando…';
+
+        try {
+          if (demoChatMode === 'demo') {
+            addDemoMessage('assistant', buildDemoReply(question), 'Demonstração simulada');
+            return;
+          }
+
+          demoChatHistory.push({ role: 'user', content: question });
+          const response = await fetch('/api/chat', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              message: question,
+              history: demoChatHistory.slice(-8, -1)
+            })
+          });
+          const result = await response.json();
+          if (!response.ok) throw new Error(result.error || 'A consulta à API não foi concluída.');
+
+          demoChatHistory.push({ role: 'assistant', content: result.answer });
+          addDemoMessage('assistant', result.answer);
+        } catch (error) {
+          if (demoChatHistory[demoChatHistory.length - 1]?.role === 'user') demoChatHistory.pop();
+          demoChatError.textContent = error.message || 'Falha de conexão com o backend.';
+          demoChatError.hidden = false;
+        } finally {
+          demoChatSend.disabled = false;
+          demoChatSend.textContent = 'Enviar pergunta';
+        }
+      });
+
+      demoChatInput.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter' && !event.shiftKey) {
+          event.preventDefault();
+          demoChatForm.requestSubmit();
+        }
+      });
+
+      refreshDemoApiStatus();
     </script>
   </body>
 </html>
