@@ -29,7 +29,17 @@ A página `github-presentation.html` é um material estático para a aula. Ela e
 
 ## Apresentação sobre GitHub
 
-A página `github-presentation.html` foi criada para apresentar o valor do GitHub em projetos digitais, mostrando versionamento, colaboração, organização e publicação.
+A página `github-presentation.html` é a apresentação premium sobre Git, GitHub, trabalho em equipe e IA. Ela pode ser publicada sozinha como página inicial do GitHub Pages pelo workflow `.github/workflows/publish-presentation.yml`.
+
+### Colocar a apresentação online
+
+1. Crie um repositório GitHub e conecte esta pasta local com `git remote add origin URL_DO_REPOSITORIO`.
+2. Envie a branch `main` ou `master` para o GitHub.
+3. Nas configurações do repositório, em **Settings → Pages**, selecione **GitHub Actions** como origem.
+4. Aguarde a execução de **Publish GitHub + IA presentation** na aba **Actions**.
+5. A página publicada ficará em `https://USUARIO.github.io/REPOSITORIO/` (ou `https://USUARIO.github.io/` para um repositório de usuário chamado `USUARIO.github.io`).
+
+O workflow já prepara `github-presentation.html` como `index.html` e publica apenas essa apresentação. Este workspace ainda não possui um remoto GitHub configurado; por isso, é necessário conectar o repositório e fazer o primeiro push para disponibilizar um endereço público.
 
 ## Estrutura
 
