@@ -1,0 +1,22 @@
+{
+  "name": "pulseboard-ai",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "PulseBoard with a secure OpenAI-powered assistant",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "express": "^5.1.0",
+    "express-rate-limit": "^8.1.0",
+    "helmet": "^8.1.0",
+    "openai": "^5.12.2"
+  }
+}

@@ -232,6 +232,10 @@
         border-color: rgba(139, 92, 246, 0.35);
         color: var(--text);
       }
+      .tab:focus-visible {
+        outline: 2px solid #c4b5fd;
+        outline-offset: 3px;
+      }
 
       .tab-panel {
         display: none;
@@ -388,8 +392,8 @@
         <nav class="nav-links">
           <a href="#visao">Visão geral</a>
           <a href="#fluxo-ia">Fluxo</a>
-          <a href="#skills">Skills</a>
-          <a href="#seguranca">Segurança</a>
+          <a href="#visao" data-open-tab="skills">Skills</a>
+          <a href="#visao" data-open-tab="security">Segurança</a>
         </nav>
       </div>
     </header>
@@ -424,14 +428,15 @@
       </section>
 
       <section id="visao" class="product-shell">
-        <div class="tabs" aria-label="Abas da integração com IA">
-          <button class="tab active" type="button" data-tab="overview">Visão geral</button>
-          <button class="tab" type="button" data-tab="workflow">Fluxo de trabalho</button>
-          <button class="tab" type="button" data-tab="skills">Skills e automações</button>
-          <button class="tab" type="button" data-tab="security">Permissões e segurança</button>
+        <div class="tabs" role="tablist" aria-label="Abas da integração com IA">
+          <button id="tab-overview" class="tab active" type="button" role="tab" aria-selected="true" aria-controls="overview" data-tab="overview">Visão geral</button>
+          <button id="tab-workflow" class="tab" type="button" role="tab" aria-selected="false" aria-controls="workflow" data-tab="workflow">Fluxo de trabalho</button>
+          <button id="tab-skills" class="tab" type="button" role="tab" aria-selected="false" aria-controls="skills" data-tab="skills">Skills e automações</button>
+          <button id="tab-setup-ai" class="tab" type="button" role="tab" aria-selected="false" aria-controls="setup-ai" data-tab="setup-ai">Configuração Git + IA</button>
+          <button id="tab-security" class="tab" type="button" role="tab" aria-selected="false" aria-controls="security" data-tab="security">Permissões e segurança</button>
         </div>
 
-        <div id="overview" class="tab-panel active">
+        <div id="overview" class="tab-panel active" role="tabpanel" aria-labelledby="tab-overview" tabindex="0">
           <div class="pane-grid">
             <div class="feature-stack">
               <div class="feature-row">
@@ -471,7 +476,7 @@
           </div>
         </div>
 
-        <div id="workflow" class="tab-panel">
+        <div id="workflow" class="tab-panel" role="tabpanel" aria-labelledby="tab-workflow" tabindex="0">
           <div class="pane-grid">
             <div class="feature-stack">
               <div class="feature-row">
@@ -510,7 +515,7 @@ git push origin main</div>
           </div>
         </div>
 
-        <div id="skills" class="tab-panel">
+        <div id="skills" class="tab-panel" role="tabpanel" aria-labelledby="tab-skills" tabindex="0">
           <div class="pane-grid">
             <div class="feature-stack">
               <div class="feature-row">
@@ -536,7 +541,104 @@ git push origin main</div>
           </div>
         </div>
 
-        <div id="security" class="tab-panel">
+        <div id="setup-ai" class="tab-panel" role="tabpanel" aria-labelledby="tab-setup-ai" tabindex="0">
+          <div class="pane-grid">
+            <div class="feature-stack">
+              <div class="feature-row">
+                <h3>O que instalar e preparar</h3>
+                <ul>
+                  <li><strong>Git:</strong> instalado e disponível no terminal (Git Bash, PowerShell ou terminal do VS Code).</li>
+                  <li><strong>Editor:</strong> VS Code ou outro editor com integração de IA compatível.</li>
+                  <li><strong>Assistente de IA:</strong> extensão ou agente autorizado, conta ativa e acesso habilitado pela organização.</li>
+                  <li><strong>GitHub:</strong> conta com acesso ao repositório e autenticação configurada.</li>
+                  <li><strong>Ferramentas do projeto:</strong> runtime e dependências exigidos pelo repositório, por exemplo Node.js ou Python quando aplicável.</li>
+                </ul>
+                <p>Os recursos, limites e automações disponíveis variam conforme o produto de IA, o plano contratado e as políticas da organização.</p>
+              </div>
+
+              <div class="feature-row">
+                <h3>Formas de integrar a IA</h3>
+                <ul>
+                  <li><strong>No editor:</strong> extensão ou agente com acesso ao workspace aberto; ideal para consultas e mudanças locais revisáveis.</li>
+                  <li><strong>No GitHub:</strong> agente de codificação autorizado no repositório, sujeito às permissões e regras da organização.</li>
+                  <li><strong>Em automações:</strong> workflows e APIs podem chamar serviços de IA usando secrets protegidos, permissões mínimas e revisão apropriada.</li>
+                </ul>
+                <p>Esses modos são diferentes: abrir o repositório com um assistente no editor não concede automaticamente acesso remoto nem permissão para fazer push.</p>
+              </div>
+
+              <div class="feature-row">
+                <h3>Configuração inicial do Git</h3>
+                <p>Configure a identidade que ficará registrada nos commits e confirme que o repositório remoto aponta para o projeto correto.</p>
+                <div class="code-block">git --version
+git config --global user.name "Seu nome"
+git config --global user.email "seu-email@exemplo.com"
+git config --global init.defaultBranch main
+git remote -v</div>
+                <p>Autentique-se no GitHub pelo fluxo oficial do editor, pelo Git Credential Manager ou com SSH. Opcionalmente, instale o GitHub CLI e use <strong>gh auth login</strong>. Nunca coloque senha ou token diretamente em comandos, prompts ou arquivos versionados.</p>
+              </div>
+
+              <div class="feature-row">
+                <h3>Trazer um repositório existente</h3>
+                <div class="code-block">git clone https://github.com/organizacao/repositorio.git
+cd repositorio
+git status
+git pull --rebase origin main</div>
+                <p>Se o projeto já está no computador, abra a pasta raiz no editor e valide o remoto com <strong>git remote -v</strong>.</p>
+              </div>
+            </div>
+
+            <div class="feature-stack">
+              <div class="feature-row">
+                <h3>Comandos do ciclo com IA</h3>
+                <p>Peça à IA para explicar o estado e sugerir o próximo passo; confira o resultado no terminal antes de confirmar.</p>
+                <div class="code-block">git status
+git diff
+git diff --staged
+git add caminho/do/arquivo
+git commit -m "feat: descreve a mudança"
+git push -u origin nome-da-branch</div>
+                <ul>
+                  <li><strong>status/diff:</strong> entender exatamente o que mudou.</li>
+                  <li><strong>add/commit:</strong> selecionar e registrar mudanças revisadas.</li>
+                  <li><strong>push:</strong> enviar a branch para o remoto.</li>
+                  <li><strong>pull/fetch:</strong> atualizar ou inspecionar mudanças remotas.</li>
+                </ul>
+              </div>
+
+              <div class="feature-row">
+                <h3>Trabalho seguro em branch e PR</h3>
+                <div class="code-block">git switch -c feat/minha-alteracao
+git fetch origin
+git pull --rebase origin main
+git push -u origin feat/minha-alteracao</div>
+                <p>Abra um pull request no GitHub, descreva objetivo, testes e riscos, peça revisão e faça merge conforme as regras do repositório.</p>
+              </div>
+
+              <div class="feature-row">
+                <h3>Arquivos locais e segredos</h3>
+                <p>Inclua no <strong>.gitignore</strong> dependências, builds, logs e arquivos locais; não versione <strong>.env</strong> com credenciais. Compartilhe apenas um <strong>.env.example</strong> sem valores secretos.</p>
+                <div class="code-block"># .gitignore
+.env
+.env.*
+!.env.example
+node_modules/
+dist/</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="feature-row" style="margin-top: 18px;">
+            <h3>Como fazer consultas úteis à IA</h3>
+            <p>Informe o objetivo, o contexto, os arquivos relevantes, as restrições e como validar o resultado. Peça primeiro análise e plano quando a tarefa for grande.</p>
+            <div class="code-block">"Analise o estado atual com git status e git diff. Explique as mudanças sem editar nada.
+Depois proponha um plano. Não inclua .env, tokens ou dados pessoais.
+Ao terminar, liste os arquivos alterados, os testes executados e os comandos Git sugeridos.
+Não faça push nem merge sem minha confirmação."</div>
+            <p>Boas consultas: “resuma este diff para uma PR”, “explique este conflito sem resolvê-lo ainda”, “sugira testes para esta alteração” ou “prepare uma mensagem de commit; mostre-a antes de executar”.</p>
+          </div>
+        </div>
+
+        <div id="security" class="tab-panel" role="tabpanel" aria-labelledby="tab-security" tabindex="0">
           <div class="pane-grid">
             <div class="feature-stack">
               <div class="feature-row">
@@ -559,6 +661,7 @@ git push origin main</div>
                   <li>Decisões de merge, deploy e liberação.</li>
                   <li>Conteúdo crítico do produto e estratégia da entrega.</li>
                 </ul>
+                <p>Se um segredo for enviado ao Git, removê-lo do arquivo não basta: revogue ou troque a credencial e siga o procedimento de resposta a incidentes da equipe.</p>
               </div>
             </div>
           </div>
@@ -615,12 +718,25 @@ git push origin main</div>
       const tabs = document.querySelectorAll('.tab');
       const panels = document.querySelectorAll('.tab-panel');
 
-      tabs.forEach((tab) => {
-        tab.addEventListener('click', () => {
-          const target = tab.dataset.tab;
-          tabs.forEach((item) => item.classList.toggle('active', item === tab));
-          panels.forEach((panel) => panel.classList.toggle('active', panel.id === target));
+      function activateTab(target) {
+        tabs.forEach((tab) => {
+          const isActive = tab.dataset.tab === target;
+          tab.classList.toggle('active', isActive);
+          tab.setAttribute('aria-selected', String(isActive));
+          tab.tabIndex = isActive ? 0 : -1;
         });
+
+        panels.forEach((panel) => {
+          panel.classList.toggle('active', panel.id === target);
+        });
+      }
+
+      tabs.forEach((tab) => {
+        tab.addEventListener('click', () => activateTab(tab.dataset.tab));
+      });
+
+      document.querySelectorAll('[data-open-tab]').forEach((link) => {
+        link.addEventListener('click', () => activateTab(link.dataset.openTab));
       });
     </script>
   </body>

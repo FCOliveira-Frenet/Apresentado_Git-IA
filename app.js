@@ -384,8 +384,111 @@ document.addEventListener('DOMContentLoaded', () => {
   const taskForm = document.getElementById('task-form');
   const closeModalButtons = document.querySelectorAll('[data-close-modal="true"]');
   const searchInput = document.getElementById('search-input');
+  const aiForm = document.getElementById('ai-chat-form');
+  const aiInput = document.getElementById('ai-input');
+  const aiMessages = document.getElementById('ai-messages');
+  const aiSendButton = document.getElementById('ai-send-button');
+  const aiError = document.getElementById('ai-error');
+  const aiStatus = document.querySelector('.ai-status');
+  const aiHistory = [];
+
+  function appendAiMessage(role, content) {
+    const message = document.createElement('article');
+    message.className = `ai-message ${role === 'user' ? 'user-message' : 'assistant-message'}`;
+
+    const avatar = document.createElement('span');
+    avatar.className = 'message-avatar';
+    avatar.textContent = role === 'user' ? 'U' : '✦';
+
+    const body = document.createElement('div');
+    body.className = 'message-content';
+    const author = document.createElement('strong');
+    author.textContent = role === 'user' ? 'Você' : 'ChatGPT';
+    const text = document.createElement('p');
+    text.textContent = content;
+    body.append(author, text);
+    message.append(avatar, body);
+    aiMessages.append(message);
+    aiMessages.scrollTop = aiMessages.scrollHeight;
+  }
+
+  async function checkAiStatus() {
+    try {
+      const response = await fetch('/api/health');
+      if (!response.ok) throw new Error('API indisponível');
+      const status = await response.json();
+      aiStatus.classList.toggle('unconfigured', !status.configured);
+      aiStatus.lastChild.textContent = status.configured ? ' API conectada' : ' Configure a API';
+    } catch (_error) {
+      aiStatus.classList.add('unconfigured');
+      aiStatus.lastChild.textContent = ' Inicie o servidor';
+    }
+  }
+
+  async function sendAiMessage(message) {
+    const question = message.trim();
+    if (!question || aiSendButton.disabled) return;
+
+    aiError.hidden = true;
+    appendAiMessage('user', question);
+    aiHistory.push({ role: 'user', content: question });
+    aiInput.value = '';
+    aiSendButton.disabled = true;
+    aiSendButton.textContent = 'Consultando…';
+
+    try {
+      const response = await fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          message: question,
+          history: aiHistory.slice(-10, -1),
+          tasks: tasks.map(({ title, date, time, category, owner, priority, stage, notes }) => ({
+            title, date, time, category, owner, priority, stage, notes
+          }))
+        })
+      });
+      const result = await response.json();
+      if (!response.ok) throw new Error(result.error || 'Não foi possível consultar a IA.');
+
+      aiHistory.push({ role: 'assistant', content: result.answer });
+      appendAiMessage('assistant', result.answer);
+    } catch (error) {
+      aiError.textContent = error.message || 'Falha de conexão. Confira se o servidor está iniciado.';
+      aiError.hidden = false;
+    } finally {
+      aiSendButton.disabled = false;
+      aiSendButton.innerHTML = 'Enviar pergunta <span>↗</span>';
+      aiInput.focus();
+    }
+  }
 
   datePicker.value = state.selectedDate;
+  checkAiStatus();
+
+  document.getElementById('open-ai-assistant').addEventListener('click', () => {
+    document.getElementById('ai-assistant').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    aiInput.focus({ preventScroll: true });
+  });
+
+  document.querySelectorAll('[data-ai-prompt]').forEach((button) => {
+    button.addEventListener('click', () => {
+      aiInput.value = button.dataset.aiPrompt;
+      aiInput.focus();
+    });
+  });
+
+  aiForm.addEventListener('submit', (event) => {
+    event.preventDefault();
+    sendAiMessage(aiInput.value);
+  });
+
+  aiInput.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter' && !event.shiftKey) {
+      event.preventDefault();
+      aiForm.requestSubmit();
+    }
+  });
 
   document.querySelectorAll('.filter-button').forEach((button) => {
     button.addEventListener('click', () => {
